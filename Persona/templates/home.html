@@ -1,0 +1,51 @@
+{% extends 'index.html' %}
+{% load static%}
+{% block title %}{% endblock title %}
+{% block css %}
+<style>
+    #nav-lateral{
+        border-right: 1px solid rgb(128, 128, 128);
+    }
+    .cont{
+        padding: 20px;
+    }
+    .opc-nav{
+        text-decoration: none;
+        display: block;
+        color: rgb(134, 134, 134);
+        border: 1px solid rgb(124, 124, 124);
+        padding: 10px;
+        margin: 10px;
+        border-radius: 24px;
+    }
+    .opc-nav:hover{
+        background-color: #3E4F87;
+        color: white;
+    }
+    html,body{
+        height: 100%;
+    }
+    #contenedor{
+        height: 90%;
+        margin: 0;
+    }
+</style>
+{% endblock %}
+{% block contenedor %}
+<div class="row g-3" id="contenedor">
+    <div class="col-md-2 cont" id="nav-lateral">
+        <img src=" {% static 'img/doctor.jpg' %} " class="img-thumbnail mx-auto d-block" alt="" width="100px" height="100px" style="border-radius: 50%;">
+        <p>Carlos Iván Almeida Dueñas</p>
+        <a href="{% url 'configuracion' %}" class="opc-nav text-center"><i class="fas fa-building"> </i> Configuración</a>
+        <a href="{% url 'historial' %}" class="opc-nav text-center"><i class="fas fa-building"> </i> Historial</a>
+        <a href="{% url 'recomendaciones' %}" class="opc-nav text-center"><i class="fas fa-chart-pie"> </i> Recomendaciones</a>
+        <a href="{% url 'perfil' %}" class="opc-nav text-center"><i class="fas fa-chart-pie"> </i> Perfil</a>
+        <a href="/" class="opc-nav text-center"><i class="fas fa-window-close"> </i> Cerrar sesión</a>
+    </div>
+    <div class="col-md-10 cont">
+        {% block subcontenedor %}
+            <img src=" {% static 'img/doctor.jpg' %} " alt="" width="500px" class="mx-auto d-block">
+            {% endblock %}
+    </div>
+</div>
+{% endblock %}

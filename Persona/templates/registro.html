@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% load static%}
+{% block title %}Crear cuenta | {% endblock title %}
+{% block css %}
+<style>
+    #formLogin {
+        border-left: 2px solid rgb(141, 141, 141);
+        height: 500px;
+        padding: 30px;
+        padding-top: 60px;
+    }
+</style>
+    {% endblock %} 
+{% block contenedor %}
+<div class="row g-3" style="margin: 20px;">
+    <div class="col-md-7">
+        <h2>Bienvenido a Dainattor</h2>
+        <h5 class="fs-4 display-6">
+            Un software que brinda predicciones de un posible trastorno emocional mediante el análisis de las expresiones faciales
+        </h5>
+        <img src=" {% static 'img/doctor.jpg' %} " alt="" width="450px" class="mx-auto d-block">
+    </div>
+    <div class="col-md-4">
+        <form class="was-validated" method="POST" id="formRegistroUsuario" name="formRegistroUsuario">
+            {% csrf_token %}
+            <h1 class="display-7">Crear cuenta</h1>
+            <div class="mb-3">
+                <label for="txtNombres" class="form-label">Nombres y apellidos</label>
+                <input type="text" form="formRegistroUsuario" class="form-control" id="txtNombres" name="txtNombres" placeholder="nombres" maxlength="70" required />
+            </div>
+            <div class="mb-3">
+                <label for="txtCedula" class="form-label">Cédula</label>
+                <input type="text" form="formRegistroUsuario" class="form-control" id="txtCedula" name="txtCedula" placeholder="cédula" maxlength="10" required />
+            </div>
+            <div class="mb-3">
+                <label for="dtmFechaNaci" class="form-label">Fecha de nacimiento</label>
+                <input type="date" form="formRegistroUsuario" class="form-control" id="dtmFechaNaci" name="dtmFechaNaci" required />
+            </div>
+            <div class="mb-3">
+                <label for="txtUsuario" class="form-label">Usuario</label>
+                <input type="text" form="formRegistroUsuario" class="form-control" id="txtUsuario" name="txtUsuario" placeholder="usuario" maxlength="20" required />
+            </div>
+            <div class="mb-3">
+                <label for="txtClave" class="form-label">Contraseña</label>
+                <input type="password" form="formRegistroUsuario" class="form-control" id="txtClave" name="txtClave" placeholder="***********" required />
+            </div>
+            <div class="mb-3">
+                <label for="txtClave2" class="form-label">Repita la contraseña</label>
+                <input type="password" form="formRegistroUsuario" class="form-control" id="txtClave2" name="txtClave2" placeholder="***********" required />
+            </div>
+            <button id="btnCrearCuenta" class="btn btn-success" type="submit" form="formRegistroUsuario"><i class="fas fa-save"></i> Crear cuenta</button>
+            <div class="log-links">
+                <div class="mt-1">
+                    Si ya tienes una cuenta
+                    <a href="/">
+                        inicia sesión aquí.
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

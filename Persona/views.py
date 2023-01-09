@@ -28,20 +28,20 @@ def IniciarSesion(request):
     try:
         if request.method == 'POST':
             usuario = request.POST['txtUsuario']
-            clave = cifrar(request.POST['txtClave'])
-            unUsuario = Usuarios.objects.get(nom_usuario = usuario, clave = clave)
+            unUsuario = Usuarios.objects.get(nom_usuario = usuario)
             if unUsuario:
-                request.session['usuarioId'] = unUsuario.id
-                request.session['personaId'] = unUsuario.persona.id
-                request.session['nombres'] = unUsuario.persona.nombres_apellidos
-                if unUsuario.persona.foto_perfil:
-                    request.session['fotoPerfil'] = unUsuario.persona.foto_perfil.url
-                return JsonResponse({'result': '1'})
+                if unUsuario.clave == cifrar(request.POST['txtClave']):
+                    request.session['usuarioId'] = unUsuario.id
+                    request.session['personaId'] = unUsuario.persona.id
+                    request.session['nombres'] = unUsuario.persona.nombres_apellidos
+                    if unUsuario.persona.foto_perfil:
+                        request.session['fotoPerfil'] = unUsuario.persona.foto_perfil.url
+                    return JsonResponse({'result': '1'})
+                return JsonResponse({'result': '2'})
             return JsonResponse({'result': '2'})
     except Usuarios.DoesNotExist:
         return JsonResponse({'result': '2'})
     except Exception as e:
-        print(str(e))
         return JsonResponse({'result': '0'})
 
 # Vista para cerrar sesión
@@ -64,6 +64,7 @@ def vwPerfil(request):
         return redirect('/')
     try:
         unUsuario = Usuarios.objects.get(id = request.session['usuarioId'])
+        unUsuario.persona.fecha_nacimiento = unUsuario.persona.fecha_nacimiento.strftime('%Y-%m-%d')
         return render(request, 'perfil.html', {'unUsuario': unUsuario})
     except Usuarios.DoesNotExist:
         return JsonResponse({'result': '2'})
@@ -97,10 +98,8 @@ def vwGuardarUsuario(request):
                     return JsonResponse({'result': '3'})        
     except IntegrityError:
         # Usuario repetido
-        print("aquiii")
         return JsonResponse({'result': '4'})   
     except Exception as e:
-        print(str(e))
         return JsonResponse({'result': '0'})
 
 # Vista para realizar los cambios en los datos del usuario

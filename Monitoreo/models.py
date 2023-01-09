@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
 from Persona.models import Usuarios
-from Persona.image import Image
+from Monitoreo.image import Image
 from sklearn import linear_model
 
 # Create your models here.

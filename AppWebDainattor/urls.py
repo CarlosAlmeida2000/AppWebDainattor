@@ -35,6 +35,7 @@ urlpatterns = [
     path('logout/', vwPersona.CerrarSesion, name='logout'),
     # Sección de Monitoreo
     path('configuracion/', vwMonitoreo.vwConfiguracion, name='configuracion'),
+    path('capturar-rostro-entrenamiento/', vwMonitoreo.vwCaptRostroEntrena, name='capturar-rostro-entrenamiento'),
     path('historial/', vwMonitoreo.vwHistorial, name='historial'),
     path('recomendaciones/', vwMonitoreo.vwRecomendaciones, name='recomendaciones'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

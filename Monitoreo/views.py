@@ -1,9 +1,15 @@
 from .entrenamiento_facial import EntrenamientoFacial
 from django.shortcuts import render, redirect
+from .reconocimiento import ExpresionFacial
+from Monitoreo.models import Historial
 from django.http import JsonResponse
+from Persona.models import Usuarios
+from django.db.models import Q
 from .image import Image
+import datetime
 
 entrenamiento_facial = EntrenamientoFacial()
+expresion = ExpresionFacial()
 
 # Create your views here.
 # Vista para renderizar la plantilla de index
@@ -13,6 +19,7 @@ def vwConfiguracion(request):
         return redirect('/')
     return render(request, 'configuracion.html')
 
+# Vista que guardar una foto para el entrenamiento facial
 def vwCaptRostroEntrena(request):
     try:
         if request.method == 'POST':
@@ -23,14 +30,38 @@ def vwCaptRostroEntrena(request):
     except Exception as e:
         return JsonResponse({'result': '0'})
 
-# Vista para renderizar la plantilla de index
+# Vista que analiza la expresión facial de una imagen
+def vwMonitorearExpre(request):
+    try:
+        if request.method == 'POST':
+            img = Image()
+            imagen_file = img.get_file(request.POST['imagen'][5:])
+            result, tiene_rostro, expresion_facial = expresion.reconocer(request.session['usuarioId'], imagen_file)
+            return JsonResponse({'result': result, 'tiene_rostro': tiene_rostro, 'expresion_facial': expresion_facial})
+    except Exception as e:
+        return JsonResponse({'result': '0'})
+
+# Vista para renderizar la plantilla de historial
 def vwHistorial(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
-    return render(request, 'historial.html')
+    historial = Historial.objects.filter(usuario_id = request.session.get('usuarioId'))
+    return render(request, 'historial.html', {'historial': historial})
 
-# Vista para renderizar la plantilla de index
+# Vista para filtrar historial de monitoreo
+def vwBuscarHistorial(request):
+    # Si no existe usuario autenticado, se lo redirecciona al login
+    if not request.session.get('usuarioId'):
+        return redirect('/')
+    fecha = datetime.datetime.strptime(request.POST['dtmFechaHistorial'], "%Y-%m-%d").date() + datetime.timedelta(days = 1)
+    if request.POST['expresion-facial'] == 'Todas':
+        historial = Historial.objects.filter(Q(usuario_id = request.session.get('usuarioId')) & Q(fecha_hora__lte = fecha))
+    else:
+        historial = Historial.objects.filter(Q(usuario_id = request.session.get('usuarioId')) & Q(expresion_facial = request.POST['expresion-facial']) & Q(fecha_hora__lte = fecha))
+    return render(request, 'historial.html', {'historial': historial, 'expresionSelected': request.POST['expresion-facial'], 'fechaSeleccionada': request.POST['dtmFechaHistorial']})
+
+# Vista para renderizar la plantilla de recomendaciones
 def vwRecomendaciones(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):

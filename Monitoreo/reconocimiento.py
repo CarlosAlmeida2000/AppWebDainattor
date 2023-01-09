@@ -14,7 +14,7 @@ class ExpresionFacial:
         # atributos generales 
         self.dataTrained = 'media\\Perfiles\\img_entrenamiento'
         self.rutaModelos = 'Monitoreo\\modelos_entrenados\\'
-        self.custodiadosReconocer = []
+        self.personasEntrenadas = []
         self.expresionFacial = ''
         self.imagenExpresion = None
         # Construcción de la red neuronal convolucional
@@ -57,7 +57,7 @@ class ExpresionFacial:
         # evita el uso de openCL y los mensajes de registro innecesarios
         cv2.ocl.setUseOpenCL(False)
         # diccionario que asigna a cada etiqueta una emoción (orden alfabético)
-        self.emotion_dict = {0: 'Angry', 1: 'Disgusted', 2: 'Afraid', 3: 'Happy', 4: 'Neutral', 5: 'Sad', 6: 'Surprised'}
+        self.emotion_dict = {0: 'Enfadado', 1: 'Disgustado', 2: 'Temeroso', 3: 'Feliz', 4: 'Neutral', 5: 'Triste', 6: 'Sorprendido'}
         # cargar el clasificador de detección de rostros pre entrenado de OpenCV
         self.clasificador_haar = cv2.CascadeClassifier('Monitoreo\\modelos_entrenados\\haarcascade_frontalface_default.xml')
         # cargar el modelo entrenado para reconocer expresiones faciales
@@ -65,11 +65,11 @@ class ExpresionFacial:
         
     
     # se registra el historial de la persona
-    def guardarHistorial(self):
+    def guardarHistorial(self, usuario_id):
         historial = Historial()
         historial.fecha_hora = datetime.now()
         ultimo_dia = 1
-        ultimo_historial = Historial.objects.filter(Q(custodiado_id = self.custodiado[0].id)).order_by('-fecha_hora')
+        ultimo_historial = Historial.objects.filter(usuario_id = usuario_id).order_by('-fecha_hora')
         if (len(ultimo_historial) > 0):
             fecha_historial = datetime.strptime(ultimo_historial[0].fecha_hora.strftime('%Y-%m-%d'), '%Y-%m-%d')
             ultimo_dia = ultimo_historial[0].dia
@@ -78,59 +78,71 @@ class ExpresionFacial:
                 ultimo_dia += 1
         historial.dia = ultimo_dia
         historial.expresion_facial = self.expresionFacial
-        historial.custodiado = self.custodiado[0]
+        historial.usuario = Usuarios.objects.get(pk = usuario_id)
         frame_jpg = cv2.imencode('.png', cv2.resize(self.imagenExpresion,(450, 450),interpolation = cv2.INTER_CUBIC))
         file = ContentFile(frame_jpg[1])
-        historial.imagen_expresion.save('persona_id_' + str(self.custodiado[0].persona.id) + '_fecha_' + str(historial.fecha_hora) + '.png', file, save = True)
+        historial.imagen_expresion.save('usuario_id_' + str(usuario_id) + '_fecha_' + str(historial.fecha_hora) + '.png', file, save = True)
         historial.save()
 
-    def reconocer(self, imagen):
+    def reconocer(self, usuario_id, imagen):
         try:
+            personas_desconocidas = 0
             # cargar el modelo para el reconocimiento facial: El reconocimiento facial se realiza mediante el clasificador de distancia y vecino más cercano
             self.face_recognizer = cv2.face.LBPHFaceRecognizer_create()
             self.face_recognizer.read(self.rutaModelos + 'reconocedor_facial.xml')
-            # se obtine la lista de personas a reconocer
-            self.custodiadosReconocer = os.listdir(self.dataTrained)
-            # si recibimos imagen
-            if imagen:
-                # Lee una imagen de un búfer en la memoria.
-                video = cv2.imdecode(np.fromstring(imagen, dtype = np.uint8), cv2.IMREAD_COLOR)
-                gray = cv2.cvtColor(video, cv2.COLOR_BGR2GRAY)
-                auxFrame = gray.copy()
-                auxFrame_color = video.copy()
-                # detectando rostros - encuentra la cascada haar para dibujar la caja delimitadora alrededor de la cara
-                faces = self.faceClassif.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5)
-                # recorriendo rostros 
-                for (x, y, w, h) in faces:
-                    rostro = auxFrame[y:y + h, x:x + w]
-                    self.imagenExpresion = auxFrame_color[y:y + h, x:x + w]
-                    # reconocimiento facial
-                    rostro = cv2.resize(rostro, (150, 150), interpolation = cv2.INTER_CUBIC)
-                    persona_identif = self.face_recognizer.predict(rostro)
-                    cv2.putText(video,'{}'.format(persona_identif),(x, y - 5),1,1.3,(255, 255, 0), 1, cv2.LINE_AA)
-                    # se verifica si es la persona
-                    if persona_identif[1] < 70:
-                        self.custodiado = Custodiados.objects.filter(persona_id = self.custodiadosReconocer[persona_identif[0]]).select_related('persona')
-                        if(len(self.custodiado)):
-                            cv2.putText(video,'{}'.format(self.custodiado[0].persona.nombres),(x, y - 25), 2, 1.1,(0, 255, 0),1,cv2.LINE_AA)
-                            cv2.rectangle(video, (x, y),(x + w,y + h),(0, 255, 0), 2)
+            # se obtine la lista de personas a entrenadas
+            self.personasEntrenadas = os.listdir(self.dataTrained)
+            # convertir en escala de grises la imagen
+            gray = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
+            auxFrame = gray.copy()
+            auxFrame_color = imagen.copy()
+            # detectando rostros - encuentra la cascada haar para dibujar la caja delimitadora alrededor de la cara
+            faces = self.clasificador_haar.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5)
+            # recorriendo rostros 
+            for (x, y, w, h) in faces:
+                rostro = auxFrame[y:y + h, x:x + w]
+                self.imagenExpresion = auxFrame_color[y:y + h, x:x + w]
+                # reconocimiento facial
+                rostro = cv2.resize(rostro, (150, 150), interpolation = cv2.INTER_CUBIC)
+                persona_identif = self.face_recognizer.predict(rostro)
+                # se verifica si es la persona
+                if persona_identif[1] < 70:
+                    usuario_id_reconocido = self.personasEntrenadas[persona_identif[0]]
+                    if(str(usuario_id) == str(usuario_id_reconocido)):
+                        self.expresiones_recono = {}
+                        cropped_img = np.expand_dims(np.expand_dims(cv2.resize(rostro, (48, 48)), -1), 0)
+
+                        for e in range(6):
                             # se reconoce la expresión facial
-                            cv2.rectangle(video, (x, y-50), (x + w, y + h + 10), (255, 0, 0), 2)
-                            cropped_img = np.expand_dims(np.expand_dims(cv2.resize(rostro, (48, 48)), -1), 0)
                             prediction = self.reconocedor_expresiones.predict(cropped_img)
-                            maxindex = int(np.argmax(prediction))
-                            self.expresionFacial = self.emotion_dict[maxindex]
-                            cv2.putText(video, self.expresionFacial, (x + 20, y-60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
-                            # se verifica si la última expresión facial registrada en el historial es igual a la expresión facial actual detectada, 
-                            # con el objetivo de no registrar un nuevo historial con esa misma fecha y hora
-                            ultimo_historial = (Historial.objects.filter(Q(custodiado_id = self.custodiado[0].id) & Q(expresion_facial = self.expresionFacial)).order_by('-fecha_hora'))
-                            if(len(ultimo_historial) > 0):
-                                self.guardarHistorial()
+                            expresion = self.emotion_dict[int(np.argmax(prediction))]
+
+                            contador_expresion = 1
+                            if self.expresiones_recono.get(usuario_id, -1) != -1:
+                                if self.expresiones_recono.get(usuario_id, -1).get(expresion, -1) != -1:
+                                    contador_expresion = self.expresiones_recono.get(usuario_id, -1).get(expresion, -1)
+                                    contador_expresion += 1
+                                    self.expresiones_recono[usuario_id][expresion] = contador_expresion
+                                else:
+                                    self.expresiones_recono.get(usuario_id, -1).update({expresion: 1})
                             else:
-                                self.guardarHistorial()
+                                self.expresiones_recono = {usuario_id: {expresion: 1}}
+
+                        emociones = self.expresiones_recono.get(usuario_id, -1)
+                        self.expresionFacial = max(emociones, key = emociones.get)
+
+                        # se verifica si la última expresión facial registrada en el historial es igual a la expresión facial actual detectada
+                        ultimo_historial = (Historial.objects.filter(Q(usuario_id = usuario_id) & Q(expresion_facial = self.expresionFacial)).order_by('-fecha_hora'))
+                        if(len(ultimo_historial) > 0):
+                            self.guardarHistorial(usuario_id)
+                        else:
+                            self.guardarHistorial(usuario_id)
                     else:
-                        cv2.putText(video,'Desconocido',(x, y - 20), 2, 0.8,(0, 0, 255),1,cv2.LINE_AA)
-                        cv2.rectangle(video, (x, y),(x + w, y + h),(0, 0, 255), 2)
-                cv2.imshow('Video', cv2.resize(video,(1500, 760), interpolation = cv2.INTER_CUBIC))
+                        personas_desconocidas += 1
+                else:
+                    personas_desconocidas += 1
+            if(len(faces) == personas_desconocidas):
+                return '1', '0', ''
+            return '1', '1', self.expresionFacial	
         except Exception as e: 
-            print(str(e))
+            return '0', '0', ''

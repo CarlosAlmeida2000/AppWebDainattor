@@ -15,33 +15,6 @@ class Historial(models.Model):
     usuario = models.ForeignKey('Persona.Usuarios', on_delete = models.PROTECT, related_name = "historial_usuario")
 
     @staticmethod
-    def obtener_historial(request):
-        try:
-            if 'persona__cedula' in request.GET and 'cuidador_id' in request.GET:
-                custodiados = Usuarios.objects.filter(Q(persona__cedula__icontains = request.GET['persona__cedula']) & Q(cuidador__pk = request.GET['cuidador_id']))   
-                historial = Historial.objects.all().exclude(~Q(custodiado_id__in = custodiados.values('id')))
-            elif 'nombres_apellidos' in request.GET and 'cuidador_id' in request.GET:
-                custodiados = (Custodiados.objects.filter(cuidador__pk = request.GET['cuidador_id']).select_related('persona')).annotate(nombres_completos = Concat('persona__nombres', Value(' '), 'persona__apellidos'))
-                custodiados = custodiados.filter(nombres_completos__icontains = request.GET['nombres_apellidos'])
-                historial = Historial.objects.all().exclude(~Q(custodiado_id__in = custodiados.values('id')))
-            elif 'cuidador_id' in request.GET:
-                custodiados = Custodiados.objects.filter(cuidador__pk = request.GET['cuidador_id'])
-                historial = Historial.objects.all().exclude(~Q(custodiado_id__in = custodiados.values('id')))
-            else:
-                custodiados = Custodiados.objects.all()
-                historial = Historial.objects.all().exclude(~Q(custodiado_id__in = custodiados.values('id')))
-            historial = historial.values('id', 'fecha_hora', 'dia', 'expresion_facial', 'custodiado_id', 'custodiado__persona__nombres', 'custodiado__persona__apellidos', 'custodiado__persona__cedula', 'imagen_expresion')
-            file = Image()
-            for u in range(len(historial)):
-                historial[u]['fecha_hora'] = historial[u]['fecha_hora'].strftime('%Y-%m-%d %H:%M')
-                if(historial[u]['imagen_expresion'] != ''):
-                    file.ruta = historial[u]['imagen_expresion']
-                    historial[u]['imagen_expresion'] = file.get_base64()
-            return list(historial)
-        except Exception as e: 
-            return 'error'
-    
-    @staticmethod
     def obtener_grafico(request):
         try:
             custodiados = Custodiados()

@@ -4,22 +4,66 @@
 {% block subcontenedor %}
 <h4>Historial</h4>
 <div class="row mt-4">
-    <div class="row mb-4">
-        <div class="col-md-2">
-            <select id="expresion-facial" class="form-control custom-select text-center">
-                <option value="Asustado" selected>Asustado</option>
-                <option value="Enfadado">Enfadado</option>
-                <option value="Disgutado">Disgutado</option>
-                <option value="Feliz">Feliz</option>
-                <option value="Neutral">Neutral</option>
-                <option value="Sorprendido">Sorprendido</option>
-                <option value="Triste">Triste</option>
+    <form class="row mb-4" action="/buscar-historial/" method="POST" id="formRegistroUsuario" name="formRegistroUsuario">
+        {% csrf_token %}
+        <div class="col-2">
+            <input type="date" class="form-control" id="dtmFechaHistorial" name="dtmFechaHistorial" value="{{ fechaSeleccionada }}" />
+        </div>
+        <div class="col-2">
+            <select id="expresion-facial" name="expresion-facial" class="form-control custom-select text-center">
+                {% if expresionSelected == 'Todas' %}
+                    <option value="Todas" selected>Todas las expresiones</option>
+                {% else %}
+                    <option value="Todas">Todas las expresiones</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Asustado' %}
+                    <option value="Asustado" selected>Asustado</option>
+                {% else %}
+                    <option value="Asustado">Asustado</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Enfadado' %}
+                    <option value="Enfadado" selected>Enfadado</option>
+                {% else %}
+                    <option value="Enfadado">Enfadado</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Disgutado' %}
+                    <option value="Disgutado" selected>Disgutado</option>
+                {% else %}
+                    <option value="Disgutado">Disgutado</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Feliz' %}
+                    <option value="Feliz" selected>Feliz</option>
+                {% else %}
+                    <option value="Feliz">Feliz</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Neutral' %}
+                    <option value="Neutral" selected>Neutral</option>
+                {% else %}
+                    <option value="Neutral">Neutral</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Sorprendido' %}
+                    <option value="Sorprendido" selected>Sorprendido</option>
+                {% else %}
+                    <option value="Sorprendido">Sorprendido</option>
+                {% endif %}
+
+                {% if expresionSelected == 'Triste' %}
+                    <option value="Triste" selected>Triste</option>
+                {% else %}
+                    <option value="Triste">Triste</option>
+                {% endif %}
             </select>
         </div>
-        <div class="col-md-2">
-            <input type="date" class="form-control" id="dtmFechaHistorial" name="dtmFechaHistorial" required />
+        <div class="col-1">
+            <button class="btn btn-secondary btn-sm mt-1" type="submit" title="Buscar"><i class="fas fa-search"></i></button>
         </div>
-    </div>
+    </form>
     
     <div class="table-responsive-sm">
     <table class="table table-hover table-sm align-middle table-bordered text-center">
@@ -31,39 +75,37 @@
         </tr>
         </thead>
         <tbody>
+            {% for h in historial %}
             <tr>
-                <td>Feliz </td>
-                <td>08/01/2023 14:87</td>
+                <td>{{ h.expresion_facial }}</td>
+                <td>{{ h.fecha_hora|date:'l d-m-Y H:i' }}</td>
                 <td>
-                    <button type="button" class="btn btn-outline-info btn-sm"
+                    <button type="button" class="btn btn-outline-info btn-sm" onclick="javascript:verFotoHistorial('{{ h.imagen_expresion.url}}', '{{ h.expresion_facial}}')"
                     title="Ver foto de expresión"><i class="fas fa-eye"></i></button>
                 </td>
             </tr>
-            <tr>
-                <td>Feliz </td>
-                <td>08/01/2023 14:87</td>
-                <td>
-                    <button type="button" class="btn btn-outline-info btn-sm"
-                    title="Ver foto de expresión"><i class="fas fa-eye"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Feliz </td>
-                <td>08/01/2023 14:87</td>
-                <td>
-                    <button type="button" class="btn btn-outline-info btn-sm"
-                    title="Ver foto de expresión"><i class="fas fa-eye"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <td>Feliz </td>
-                <td>08/01/2023 14:87</td>
-                <td>
-                    <button type="button" class="btn btn-outline-info btn-sm"
-                    title="Ver foto de expresión"><i class="fas fa-eye"></i></button>
-                </td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
+
+<div id="verFotoHistorial" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Historial</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <img class="row m-3" id="fotoHistorial" >
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fas fa-times"></i> Salir</button>
+        </div>
+        </div>
+    </div>
+</div>
 {% endblock %} 
+{% block js %}
+<script src="{% static '/dainattor/js/historial.js'%}"></script>
+{% endblock %}  

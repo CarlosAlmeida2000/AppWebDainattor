@@ -36,7 +36,9 @@ urlpatterns = [
     # Sección de Monitoreo
     path('configuracion/', vwMonitoreo.vwConfiguracion, name='configuracion'),
     path('capturar-rostro-entrenamiento/', vwMonitoreo.vwCaptRostroEntrena, name='capturar-rostro-entrenamiento'),
+    path('monitorear-expesiones/', vwMonitoreo.vwMonitorearExpre, name='monitorear-expesiones'),
     path('historial/', vwMonitoreo.vwHistorial, name='historial'),
+    path('buscar-historial/', vwMonitoreo.vwBuscarHistorial, name='buscar-historial'),
     path('recomendaciones/', vwMonitoreo.vwRecomendaciones, name='recomendaciones'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

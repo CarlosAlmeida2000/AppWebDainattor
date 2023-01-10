@@ -145,7 +145,7 @@ $(document).ready(function () {
                     text: 'Datos de perfil modificados exitosamente.',
                     confirmButtonText: 'Ok'
                     }).then((result) => {
-                        location.reload();
+                        location.reload()
                     });
                 break;
                 case '3':

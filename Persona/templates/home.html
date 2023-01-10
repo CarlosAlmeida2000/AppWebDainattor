@@ -22,6 +22,10 @@
         background-color: #3E4F87;
         color: white;
     }
+    .activate-menu{
+        background-color: #3E4F87;
+        color: white;
+    }
     html,body{
         height: 100%;
     }
@@ -36,10 +40,10 @@
     <div class="col-md-2 cont" id="nav-lateral">
         <img src="{{ request.session.fotoPerfil }}" class="img-thumbnail mx-auto d-block" title="Foto de perfil" alt="Foto de perfil" style="border-radius: 50%; height: 100px; width: 100px;">
         <p class="text-center">{{ request.session.nombres }}</p>
-        <a href="{% url 'configuracion' %}" class="opc-nav text-center"><i class="fa fa-cog"> </i> Configuración</a>
-        <a href="{% url 'historial' %}" class="opc-nav text-center"><i class="fas fa-book-open"> </i> Historial</a>
-        <a href="{% url 'recomendaciones' %}" class="opc-nav text-center"><i class="fas fa-list-ol"> </i> Recomendaciones</a>
-        <a href="{% url 'perfil' %}" class="opc-nav text-center"><i class="fas fa-user"> </i> Perfil</a>
+        <a href="{% url 'configuracion' %}" class="opc-nav text-center {{ configuracion }}"><i class="fa fa-cog"> </i> Configuración</a>
+        <a href="{% url 'historial' %}" class="opc-nav text-center {{ opc_historial }}"><i class="fas fa-book-open"> </i> Historial</a>
+        <a href="{% url 'recomendaciones' %}" class="opc-nav text-center {{ recomendaciones }}"><i class="fas fa-list-ol"> </i> Recomendaciones</a>
+        <a href="{% url 'perfil' %}" class="opc-nav text-center {{ perfil }}"><i class="fas fa-user"> </i> Perfil</a>
         <a href="{% url 'logout' %}" class="opc-nav text-center"><i class="fas fa-window-close"> </i> Cerrar sesión</a>
     </div>
     <div class="col-md-10 cont"> 

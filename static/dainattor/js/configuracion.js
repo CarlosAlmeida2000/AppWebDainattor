@@ -66,7 +66,7 @@ function iniciarEntrenamiento(){
         switch (data.result) {
             case '1':
                 if(data.tiene_rostro == '1'){
-                    $("#estado-entrenamiento").text('Fotos capturadas: ' + (cont_imagenes + 1))
+                    $("#estado-entrenamiento").text('Fotos capturadas: ' + (cont_imagenes + 1) + ' de ' + caputarar_imagenes +' fotos')
                     $("#estado-entrenamiento").css("color", "#000000")
                     cont_imagenes += 1
                 }else{

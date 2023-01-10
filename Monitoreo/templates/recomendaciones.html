@@ -3,4 +3,36 @@
 {% block title %}Recomendaciones | {% endblock title %}
 {% block subcontenedor %}
 <h4>Recomendaciones</h4>
+<div class="row mt-4">
+    <div class="col-sm-7 card">
+        <canvas id="grafica-expresiones"></canvas>
+    </div>
+    <div class="mx-1 col-sm-4 card">
+        <div class="p-3 row">
+            <div class="row">
+                <h6>Predicción</h6>
+            </div>
+            <div class="row">
+                Se predice un trastorno impulsivo al contar con un mayor presencia de la expresión facial de enfado.
+            </div>
+        </div>
+        <div class="p-3 row">
+            <div class="row">
+                <h6>Actividades recomendadas</h6>
+            </div>
+            <div class="mx-3 row">
+                <ul>
+                    <li>actividad fdf fidnf fdifdif fdijfdijf fdijfd fdijfdi fdijdijf </li>
+                    <li>actividad fdf fidnf fdifdif fdijfdijf fdijfd fdijfdi fdijdijf</li>
+                    <li>actividad fdf fidnf fdifdif fdijfdijf fdijfd fdijfdi fdijdijf</li>
+                    <li>actividad fdf fidnf fdifdif fdijfdijf fdijfd fdijfdi fdijdijf</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+{% block js %}
+<script src="{% static '/chart/chart.js'%}"></script>
+<script src="{% static '/dainattor/js/recomendaciones.js'%}"></script>
 {% endblock %} 

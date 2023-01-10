@@ -6,10 +6,10 @@
 <div class="row mt-4">
     <form class="row mb-4" action="/buscar-historial/" method="POST" id="formRegistroUsuario" name="formRegistroUsuario">
         {% csrf_token %}
-        <div class="col-2">
+        <div class="col-sm-2">
             <input type="date" class="form-control" id="dtmFechaHistorial" name="dtmFechaHistorial" value="{{ fechaSeleccionada }}" />
         </div>
-        <div class="col-2">
+        <div class="col-sm-2">
             <select id="expresion-facial" name="expresion-facial" class="form-control custom-select text-center">
                 {% if expresionSelected == 'Todas' %}
                     <option value="Todas" selected>Todas las expresiones</option>
@@ -60,11 +60,10 @@
                 {% endif %}
             </select>
         </div>
-        <div class="col-1">
+        <div class="col-sm-1">
             <button class="btn btn-secondary btn-sm mt-1" type="submit" title="Buscar"><i class="fas fa-search"></i></button>
         </div>
     </form>
-    
     <div class="table-responsive-sm">
     <table class="table table-hover table-sm align-middle table-bordered text-center">
         <thead class="table-secondary">
@@ -88,16 +87,15 @@
         </tbody>
     </table>
 </div>
-
 <div id="verFotoHistorial" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Historial</h5>
+            <h6 class="modal-title" id="exampleModalLabel"></h6>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-            <img class="row m-3" id="fotoHistorial" >
+        <div style="white-space: nowrap; overflow-x: auto;" class="modal-body text-center">
+            <img class="row m-2" id="fotoHistorial" >
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fas fa-times"></i> Salir</button>

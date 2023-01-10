@@ -65,7 +65,7 @@ def vwPerfil(request):
     try:
         unUsuario = Usuarios.objects.get(id = request.session['usuarioId'])
         unUsuario.persona.fecha_nacimiento = unUsuario.persona.fecha_nacimiento.strftime('%Y-%m-%d')
-        return render(request, 'perfil.html', {'unUsuario': unUsuario})
+        return render(request, 'perfil.html', {'unUsuario': unUsuario, 'perfil': 'activate-menu'})
     except Usuarios.DoesNotExist:
         return JsonResponse({'result': '2'})
     except Exception as e:

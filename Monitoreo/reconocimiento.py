@@ -57,7 +57,7 @@ class ExpresionFacial:
         # evita el uso de openCL y los mensajes de registro innecesarios
         cv2.ocl.setUseOpenCL(False)
         # diccionario que asigna a cada etiqueta una emoción (orden alfabético)
-        self.emotion_dict = {0: 'Enfadado', 1: 'Disgustado', 2: 'Temeroso', 3: 'Feliz', 4: 'Neutral', 5: 'Triste', 6: 'Sorprendido'}
+        self.emotion_dict = {0: 'Enfadado', 1: 'Disgustado', 2: 'Disgustado', 3: 'Feliz', 4: 'Neutral', 5: 'Triste', 6: 'Sorprendido'}
         # cargar el clasificador de detección de rostros pre entrenado de OpenCV
         self.clasificador_haar = cv2.CascadeClassifier('Monitoreo\\modelos_entrenados\\haarcascade_frontalface_default.xml')
         # cargar el modelo entrenado para reconocer expresiones faciales

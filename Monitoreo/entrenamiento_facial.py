@@ -23,7 +23,7 @@ class EntrenamientoFacial:
                 rostro = auxFrame[y:y + h, x:x + w]
                 rostro = cv2.resize(rostro,(150, 150),interpolation = cv2.INTER_CUBIC)
                 cv2.imwrite(self.ruta_rostros + '\\' + str(usuario_id) + '/rotro_{}.png'.format(cont_imagenes), rostro)
-            if cont_imagenes == '24':
+            if cont_imagenes == '99':
                 if(self.entrenar(usuario_id) == 'entrenado'):
                     return '1', '1'
                 return '0', '0'    

@@ -15,54 +15,39 @@ class Historial(models.Model):
     usuario = models.ForeignKey('Persona.Usuarios', on_delete = models.PROTECT, related_name = "historial_usuario")
 
     @staticmethod
-    def obtener_grafico(request):
+    def obtener_grafico(usuario_id):
         try:
-            custodiados = Custodiados()
-            if 'persona__cedula' in request.GET and 'cuidador_id' in request.GET:
-                custodiados = Custodiados.objects.filter(Q(persona__cedula__icontains = request.GET['persona__cedula']) & Q(cuidador__pk = request.GET['cuidador_id']))
-            elif 'nombres_apellidos' in request.GET and 'cuidador_id' in request.GET:
-                custodiados = (Custodiados.objects.filter(cuidador__pk = request.GET['cuidador_id'])).annotate(nombres_completos = Concat('persona__nombres', Value(' '), 'persona__apellidos'))
-                custodiados = custodiados.filter(nombres_completos__icontains = request.GET['nombres_apellidos'])
-            elif 'cuidador_id' in request.GET:
-                custodiados = Custodiados.objects.filter(cuidador__pk = request.GET['cuidador_id'])
             historial_grafico = []
-            for cus in custodiados: 
-                historial = cus.historial_custodiado.all().values()
-                if (len(historial)):
-                    # calcular los días que se llevan de registro en el historial
-                    fecha_minima = (historial.order_by('fecha_hora'))[0]['fecha_hora']
-                    fecha_maxima = (historial.order_by('-fecha_hora'))[0]['fecha_hora']
-                    # Si existe una semana de registro del historial, se predice el trastorno
-                    prediccion = 'For the prediction of the disorder, you must have 7 days of records in the history.'
-                    total_dias = historial.order_by('-dia')[0]['dia']
-                    if(total_dias > 7):
-                        prediccion = Historial.prediccion_trastorno(total_dias, historial)
+            usuario = Usuarios.objects.get(pk = usuario_id)
+            historial = usuario.historial_usuario.all().values()
+            if (len(historial)):
+                # Si existe una semana de registro del historial, se predice el trastorno
+                prediccion = 'Para la predicción del trastorno, debe tener 7 días de registros en el historial.'
+                total_dias = historial.order_by('-dia')[0]['dia']
+                if(total_dias > 7):
+                    prediccion = Historial.prediccion_trastorno(total_dias, historial)
 
-                    object_json =  { 
-                    'fecha_inicio_fin': 'From '+ str(fecha_minima.strftime('%Y-%m-%d %H:%M')) + ' to ' + str(fecha_maxima.strftime('%Y-%m-%d %H:%M')),
-                    'custodiado__persona__nombres': cus.persona.nombres,
-                    'custodiado__persona__apellidos': cus.persona.apellidos,
-                    'custodiado__persona__cedula': cus.persona.cedula,
-                    'dias_historial': total_dias,
-                    'enfadado': (historial.filter(expresion_facial = 'Angry').count()),
-                    'asqueado': (historial.filter(expresion_facial = 'Disgusted').count()),
-                    'temeroso': (historial.filter(expresion_facial = 'Afraid').count()),
-                    'feliz': (historial.filter(expresion_facial = 'Happy').count()),
-                    'neutral': (historial.filter(expresion_facial = 'Neutral').count()),
-                    'triste': (historial.filter(expresion_facial = 'Sad').count()),
-                    'sorprendido': (historial.filter(expresion_facial = 'Surprised').count()),
-                    'prediccion_trastorno': prediccion
-                    }
-                    historial_grafico.append(object_json)
+                object_json =  { 
+                'dias_historial': total_dias,
+                'enfadado': (historial.filter(expresion_facial = 'Enfadado').count()),
+                'disgustado': (historial.filter(expresion_facial = 'Disgustado').count()),
+                'temeroso': (historial.filter(expresion_facial = 'Temeroso').count()),
+                'feliz': (historial.filter(expresion_facial = 'Feliz').count()),
+                'neutral': (historial.filter(expresion_facial = 'Neutral').count()),
+                'triste': (historial.filter(expresion_facial = 'Triste').count()),
+                'sorprendido': (historial.filter(expresion_facial = 'Sorprendido').count()),
+                'prediccion_trastorno': prediccion
+                }
+                historial_grafico.append(object_json)
             return historial_grafico
-        except Custodiados.DoesNotExist:    
+        except Usuarios.DoesNotExist:    
             return []
         except Exception as e: 
-            return 'error'
+            return []
 
     @staticmethod
     def prediccion_trastorno(total_dias, historial):
-        emotion_dict = {0: 'Angry', 1: 'Disgusted', 2: 'Afraid', 3: 'Happy', 4: 'Neutral', 5: 'Sad', 6: 'Surprised'}
+        emotion_dict = {0: 'Enfadado', 1: 'Disgustado', 2: 'Temeroso', 3: 'Feliz', 4: 'Neutral', 5: 'Triste', 6: 'Sorprendido'}
         frecuencia_enfadado = list()
         frecuencia_asqueado = list()
         frecuencia_temeroso = list()

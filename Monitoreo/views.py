@@ -1,3 +1,4 @@
+import Monitoreo
 from .entrenamiento_facial import EntrenamientoFacial
 from django.shortcuts import render, redirect
 from .reconocimiento import ExpresionFacial
@@ -67,3 +68,13 @@ def vwRecomendaciones(request):
     if not request.session.get('usuarioId'):
         return redirect('/')
     return render(request, 'recomendaciones.html', {'recomendaciones': 'activate-menu'})
+
+# Vista que retorna los datos para el gráfico en barra
+def vwGrafico(request):
+    try:
+        grafico = Historial.obtener_grafico(request.session.get('usuarioId'))
+        if(len(grafico)):
+            return JsonResponse({'result': '1', 'grafico': grafico})
+        return JsonResponse({'result': '0'})
+    except Exception as e:
+        return JsonResponse({'result': '0'})

@@ -39,6 +39,7 @@ urlpatterns = [
     path('monitorear-expesiones/', vwMonitoreo.vwMonitorearExpre, name='monitorear-expesiones'),
     path('historial/', vwMonitoreo.vwHistorial, name='historial'),
     path('buscar-historial/', vwMonitoreo.vwBuscarHistorial, name='buscar-historial'),
+    path('grafico/', vwMonitoreo.vwGrafico, name='grafico'),
     path('recomendaciones/', vwMonitoreo.vwRecomendaciones, name='recomendaciones'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

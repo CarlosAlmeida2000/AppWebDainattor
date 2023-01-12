@@ -40,7 +40,7 @@ urlpatterns = [
     path('historial/', vwMonitoreo.vwHistorial, name='historial'),
     path('buscar-historial/', vwMonitoreo.vwBuscarHistorial, name='buscar-historial'),
     path('grafico/', vwMonitoreo.vwGrafico, name='grafico'),
-    path('recomendaciones/', vwMonitoreo.vwRecomendaciones, name='recomendaciones'),
+    path('reporte/', vwMonitoreo.vwReporte, name='reporte'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Creando el acceso para los archivos de media

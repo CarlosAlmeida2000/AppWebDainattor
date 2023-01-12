@@ -63,11 +63,11 @@ def vwBuscarHistorial(request):
     return render(request, 'historial.html', {'historial': historial, 'expresionSelected': request.POST['expresion-facial'], 'fechaSeleccionada': request.POST['dtmFechaHistorial'], 'opc_historial': 'activate-menu'})
 
 # Vista para renderizar la plantilla de recomendaciones
-def vwRecomendaciones(request):
+def vwReporte(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
-    return render(request, 'recomendaciones.html', {'recomendaciones': 'activate-menu'})
+    return render(request, 'reporte.html', {'reporte': 'activate-menu'})
 
 # Vista que retorna los datos para el gráfico en barra
 def vwGrafico(request):

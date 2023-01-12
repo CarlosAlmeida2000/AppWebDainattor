@@ -73,8 +73,6 @@ def vwReporte(request):
 def vwGrafico(request):
     try:
         grafico = Historial.obtener_grafico(request.session.get('usuarioId'))
-        if(len(grafico)):
-            return JsonResponse({'result': '1', 'grafico': grafico})
-        return JsonResponse({'result': '0'})
+        return JsonResponse({'result': '1', 'grafico': grafico})
     except Exception as e:
         return JsonResponse({'result': '0'})

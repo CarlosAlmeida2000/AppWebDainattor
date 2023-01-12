@@ -4,9 +4,11 @@ from django.db.models.functions import Concat
 from Persona.models import Usuarios
 from Monitoreo.image import Image
 from sklearn import linear_model
+from random import sample
 
 # Create your models here.
-
+class Actividades(models.Model):
+    nombre = models.CharField(max_length = 120)
 class Historial(models.Model):
     fecha_hora = models.DateTimeField()
     dia = models.IntegerField()
@@ -21,9 +23,16 @@ class Historial(models.Model):
             usuario = Usuarios.objects.get(pk = usuario_id)
             historial = usuario.historial_usuario.all().values()
             if (len(historial)):
+                cantidad_actividades = 5
+                actividades_recomen = []
+                actividades_models = Actividades.objects.all()
+                acti_aleatorias = sample([x for x in range(1, len(actividades_models))], cantidad_actividades)
+                for i in range(cantidad_actividades):
+                    actividades_recomen.append(actividades_models.get(pk = acti_aleatorias[i]).nombre)
+
+                total_dias = historial.order_by('-dia')[0]['dia']
                 # Si existe una semana de registro del historial, se predice el trastorno
                 prediccion = 'Para la predicción del trastorno, debe tener 7 días de registros en el historial.'
-                total_dias = historial.order_by('-dia')[0]['dia']
                 if(total_dias > 1):
                     prediccion = Historial.prediccion_trastorno(total_dias, historial)
 
@@ -36,13 +45,15 @@ class Historial(models.Model):
                 'neutral': (historial.filter(expresion_facial = 'Neutral').count()),
                 'triste': (historial.filter(expresion_facial = 'Triste').count()),
                 'sorprendido': (historial.filter(expresion_facial = 'Sorprendido').count()),
-                'prediccion_trastorno': prediccion
+                'prediccion_trastorno': prediccion,
+                'actividades': actividades_recomen
                 }
                 historial_grafico.append(object_json)
             return historial_grafico
         except Usuarios.DoesNotExist:    
             return []
         except Exception as e: 
+            print(str(e))
             return []
 
     @staticmethod

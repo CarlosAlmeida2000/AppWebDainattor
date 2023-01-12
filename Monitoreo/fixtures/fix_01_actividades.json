@@ -1,0 +1,219 @@
+[
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 1,
+        "fields": {
+            "nombre": "Dar un paseo por el campo, playa o montaña"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 2,
+        "fields": {
+            "nombre": "Hacer deporte"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 3,
+        "fields": {
+            "nombre": "Hacer algún trabajo artístico (pintar, esculpir, escribir, etc.)"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 4,
+        "fields": {
+            "nombre": "Leer"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 5,
+        "fields": {
+            "nombre": "Redecorar o reordenar la casa / habitación"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 6,
+        "fields": {
+            "nombre": "Hacer un picnic"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 7,
+        "fields": {
+            "nombre": "Asistir a alguna conferencia, charla o seminario"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 8,
+        "fields": {
+            "nombre": "Escuchar música"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 9,
+        "fields": {
+            "nombre": "Ayudar a alguien en algún proyecto personal"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 10,
+        "fields": {
+            "nombre": "Jugar a un juego de mesa, cartas, etc"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 11,
+        "fields": {
+            "nombre": "Darse un largo baño"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 12,
+        "fields": {
+            "nombre": "Hacer manualidades"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 13,
+        "fields": {
+            "nombre": "Ofrecerse como voluntario de una protectora para pasear perros"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 14,
+        "fields": {
+            "nombre": "Colaborar con alguna ONG"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 15,
+        "fields": {
+            "nombre": "Hablar con algún viejo amigo con el que has perdido el contacto"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 16,
+        "fields": {
+            "nombre": "Ir a reuniones de intercambio lingüístico"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 17,
+        "fields": {
+            "nombre": "Planificar alguna actividad con amigos"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 18,
+        "fields": {
+            "nombre": "Desprenderte de objetos inútiles o del pasado"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 19,
+        "fields": {
+            "nombre": "Crear un pequeño jardín o cultivar plantas"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 20,
+        "fields": {
+            "nombre": "Bailar"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 21,
+        "fields": {
+            "nombre": "Tomar el sol"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 22,
+        "fields": {
+            "nombre": "Preparar una sorpresa a alguien"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 23,
+        "fields": {
+            "nombre": "Hacer / recibir un masaje"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 24,
+        "fields": {
+            "nombre": "Dar un paseo por la ciudad haciendo fotos"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 25,
+        "fields": {
+            "nombre": "Visitar museos o exposiciones"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 26,
+        "fields": {
+            "nombre": "Completar alguna tarea pendiente"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 27,
+        "fields": {
+            "nombre": "Cocinar algún plato nuevo"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 28,
+        "fields": {
+            "nombre": "Practicar meditación o yoga"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 29,
+        "fields": {
+            "nombre": "Tener invitados en casa"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 30,
+        "fields": {
+            "nombre": "Ir a una biblioteca"
+        }
+    },
+    {
+        "model": "Monitoreo.actividades",
+        "pk": 31,
+        "fields": {
+            "nombre": "Pasear en bicicleta"
+        }
+    }
+]

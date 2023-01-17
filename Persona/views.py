@@ -10,7 +10,7 @@ import os
 
 # Vista para renderizar la plantilla de login
 def vwInicio(request):
-    return render(request, 'login.html')
+    return render(request, 'inicio.html')
 
 # Vista para renderizar la plantilla de registro de usuario
 def vwRegistro(request):
@@ -65,7 +65,7 @@ def vwPerfil(request):
     try:
         unUsuario = Usuarios.objects.get(id = request.session['usuarioId'])
         unUsuario.persona.fecha_nacimiento = unUsuario.persona.fecha_nacimiento.strftime('%Y-%m-%d')
-        return render(request, 'perfil.html', {'unUsuario': unUsuario, 'perfil': 'activate-menu'})
+        return render(request, 'perfil.html', {'unUsuario': unUsuario, 'perfil': 'activado'})
     except Usuarios.DoesNotExist:
         return JsonResponse({'result': '2'})
     except Exception as e:

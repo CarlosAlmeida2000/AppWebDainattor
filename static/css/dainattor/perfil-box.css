@@ -1,0 +1,180 @@
+:root {
+    --color_verde_turquesa: #2a7557;
+    --color_amarillo: #fef200;
+    --color_verde: #2f762a;
+    --color_rojo: #ed1b24;
+    --color_blanco: #f9f9f9;
+    --color_verde_blanco: #f5fff8;
+    --ancho_colores: 60px;
+    --alto_colores: 12px;
+}
+
+.control-negocio,
+.admin-web {
+    display: flex;
+}
+
+.barra-lateral {
+    background-color: var(--color_verde_turquesa);
+    width: 15rem;
+    min-width: 15rem;
+    height: 100%;
+    position: fixed;
+}
+
+.panel-contenido {
+    width: 100%;
+    padding: 1.5rem;
+    margin-left: 15rem;
+}
+
+/*********** PERFIL BOX ************/
+.perfil-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    margin: 15px 0px 35px 0px;
+}
+
+.perfil-box p,
+.barra-lateral .btn-opcion {
+    color: var(--color_blanco) !important;
+}
+
+.perfil-box .img-perfil {
+    width: 6.8rem;
+    height: 6.8rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.perfil-box .img-perfil img {
+    max-height: 6.8rem;
+}
+
+.perfil-box .nombre-empresa {
+    margin: 0rem;
+    padding: 0.5rem 0rem;
+}
+
+.perfil-box .colores-macara {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ffffff8c;
+}
+.perfil-box .colores-macara div.color-amarillo {
+    background-color: var(--color_amarillo);
+    width: var(--ancho_colores);
+    height: var(--alto_colores);
+}
+.perfil-box .colores-macara div.color-verde {
+    background-color: var(--color_verde);
+    width: var(--ancho_colores);
+    height: var(--alto_colores);
+}
+.perfil-box .colores-macara div.color-rojo {
+    background-color: var(--color_rojo);
+    width: var(--ancho_colores);
+    height: var(--alto_colores);
+}
+
+/*********** OPCIONES ***********/
+.barra-lateral .opciones .btn-opcion {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.9rem 0.8rem;
+    font-size: 1rem;
+    font-weight: normal;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+}
+.barra-lateral .opciones .btn-opcion:hover {
+    background-color: #3a9c74;
+    border-left: 7px solid #dea702;
+    transition: ease-in-out 0.25s;
+}
+.barra-lateral .opciones .btn-opcion i {
+    width: 1.6rem;
+    margin-right: 0.7rem;
+    font-size: 1.3rem;
+}
+
+.activado {
+    background-color: #3a9c74 !important;
+    border-left: 7px solid #dea702 !important;
+}
+
+.nav-item.dropdown {
+    display: none;
+}
+.dropdown-toggle::after {
+    content: none;
+}
+
+@media screen and (max-width: 800px) {
+    .control-negocio {
+        display: block;
+    }
+    .panel-contenido {
+        margin-left: 0rem;
+    }
+    .barra-lateral {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    .barra-lateral .opciones .btn-opcion {
+        padding: 0.9rem 1.5rem;
+    }
+    .perfil-box {
+        margin: 0px;
+        align-items: flex-start;
+    }
+    .perfil-box .img-perfil,
+    .perfil-box .nombre-empresa {
+        display: none;
+    }
+    .perfil-box .colores-macara {
+        display: block;
+    }
+
+    .barra-lateral .opciones,
+    #btn-colores-macara {
+        display: none;
+    }
+
+    .nav-item.dropdown {
+        display: block;
+    }
+    #navbarDropdownMenuLink {
+        margin-left: 1.5rem;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    #btn-opciones {
+        width: 100%;
+        background-color: #2a7557;
+        left: 4px;
+    }
+    .barra-lateral .btn-opcion {
+        display: flex;
+        align-items: center;
+        font-size: 1.18rem;
+        padding: 0.7rem 0rem 0.7rem 1.5rem;
+    }
+    .barra-lateral .btn-opcion:hover {
+        background-color: #3a9c74;
+    }
+    .barra-lateral .btn-opcion i {
+        margin-right: 0.8rem;
+    }
+    .active {
+        border-left: none !important;
+    }
+}

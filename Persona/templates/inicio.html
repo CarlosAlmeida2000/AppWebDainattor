@@ -1,0 +1,38 @@
+{% extends "components/base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/global/ini_reg.css' %}" type="text/css">
+{% endblock css %}
+
+{% block content %}
+<main>
+    <div class="log-container">
+        <div class="log-img">
+            <img src="{% static 'img/doctor.jpg' %}" alt="" class="img-portada">
+        </div>
+        <div class="log">
+            <h3>!Hola! bienvenido a Dainattor</h3>
+            <form method="POST" id="formLogin" class="log-form">
+                {% csrf_token %}
+                <label for="validacion_usuario" class="log-f-label">Usuario</label>
+                <input type="text" id="validacion_usuario" name="txtUsuario" autocomplete="off" class="log-f-input">
+                <label for=" validacion_credenciales" class="log-f-label">Contraseña</label>
+                <input type="password" id="validacion_credenciales" name="txtClave" class="log-f-input">
+                <input id="iniciarSesion" type="submit" value="Iniciar" class="log-f-enviar btn btn-success">
+            </form>
+            <div class="log-links">
+                <div class="mt-1">
+                    Si no tienes un cuenta de inicio de sesión
+                    <a href="{% url 'registro' %}">
+                        registrate aquí.
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
+{% block js %}
+<script src="{% static '/js/dainattor/persona.js'%}"></script>
+{% endblock js %}

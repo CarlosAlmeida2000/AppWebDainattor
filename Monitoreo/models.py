@@ -113,6 +113,7 @@ class Historial(models.Model):
         # polinomio de grado 3
         modelo = np.poly1d(np.polyfit(x_train, y_train, 3))
         resultado_y = 0
+        print(x_prediction)
         print("Ecuación polinómica: \n", modelo)
-        resultado_y = ((modelo[3]) * (x_prediction) ** 3) + ((modelo[2]) * (x_prediction) ** 2) + ((modelo[1]) * (x_prediction) ** 1) + modelo[1]
+        resultado_y = ((modelo[3] * (x_prediction ** 3)) + (modelo[2] * (x_prediction ** 2)) + (modelo[1] * (x_prediction ** 1)) + modelo[0])
         return resultado_y

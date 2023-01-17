@@ -1,0 +1,124 @@
+:root {
+    --color_panel_contenido: rgba(35, 92, 69, 0.1);
+    --color_btn_agregar: rgb(250, 154, 0);
+    --color_btn_agregar_hover: rgb(232, 137, 0);
+    --radius-card: 10px;
+}
+
+body {
+    background-color: var(--color_panel_contenido);
+}
+
+/*********** PANEL DE CONTENIDO ************/
+.titulo {
+    background-color: var(--color_blanco);
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border-radius: 5px;
+}
+
+.contenido-num {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.contenido-num .caja {
+    background-color: var(--color_verde_turquesa);
+    color: var(--color_blanco);
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.nav-link {
+    color: var(--dark);
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    background-color: var(--color_verde) !important;
+    border-left: 7px solid #dea702 !important;
+    color: aliceblue;
+    font-weight: bolder;
+}
+
+.tab-content .active {
+    background-color: #d4edda !important;
+    border-left: 7px solid #dea702 !important;
+}
+
+.btn-agregar {
+    margin-left: -2px;
+    background-color: #dea702;
+}
+
+.btn-agregar:hover {
+    background-color: var(--color_btn_agregar_hover);
+}
+
+.group-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+    margin: 10px;
+}
+
+.group-cards .cards {
+    border-radius: var(--radius-card);
+    background-color: aliceblue;
+}
+
+.group-cards .cards .img-card {
+    border-top-left-radius: var(--radius-card);
+    border-top-right-radius: var(--radius-card);
+    background-color: gray;
+    height: 250px;
+}
+
+.group-cards .cards .card-content {
+    padding: 10px;
+}
+
+.group-cards .cards .card-action {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+}
+
+@media (max-width: 1366px) {
+    .group-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1180px) {
+    .group-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1010px) {
+    .group-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 670px) {
+    .contenido-num {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 430px) {
+    .group-cards {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .contenido-num {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

@@ -1,0 +1,180 @@
+/*********** PANEL DE CONTENIDO RESPOPNSIVO ************/
+.panel-contenido {
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.nombre-opcion {
+    background-color: #ffffff;
+    color: #636363;
+    padding: 0.7rem 1rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.grid-columnas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.columna {
+    max-width: 650px;
+}
+
+.datos-admin,
+.datos-empresa {
+    margin-bottom: 2.5rem;
+}
+
+.fila {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 1rem 0rem;
+}
+
+.fila .etiqueta {
+    width: 190px;
+    text-align: end;
+    width: 170px;
+}
+
+.fila .datos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 80%;
+}
+
+.fila .txt-input {
+    width: 100%;
+    margin-left: 0.6rem;
+}
+
+.hora {
+    width: 100%;
+    margin-left: 0.6rem;
+}
+
+.lista {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    margin-left: 0.6rem;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.columna .fila .lista ul {
+    margin: 0px;
+    padding-left: 25px;
+}
+
+.table td {
+    padding: 0.45rem;
+}
+.fila-celular {
+    display: block;
+    width: 75%;
+}
+.fila-cuentas-bancarias {
+    display: block;
+    width: 100%;
+}
+
+/*********** PORTADA  ************/
+.portada,
+.carousel-empresa {
+    width: 80%;
+    margin: 0 auto;
+}
+/*********** CAROUSEL ************/
+.titulo {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0rem 0.4rem 0rem;
+}
+
+.img-portada {
+    width: 100%;
+    overflow: hidden;
+}
+.img-portada img {
+    width: 100%;
+    height: auto;
+}
+
+.imagenes-carousel {
+    width: 100%;
+    background-color: rgba(224, 233, 229, 0.027);
+}
+
+.carousel-item .content-img-carrusel {
+    display: flex;
+    align-content: center;
+    height: 350px;
+}
+
+.carousel-control-next {
+    right: 3rem !important;
+}
+
+.carousel-item .content-img-carrusel .fotoCarousel {
+    height: 100%;
+    width: 100%;
+}
+
+@media screen and (max-width: 1225px) {
+    .grid-columnas {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 1090px) {
+    .columna {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .fila {
+        display: block;
+    }
+
+    .fila .etiqueta {
+        width: 190px;
+        text-align: start;
+        margin-bottom: 0.3rem;
+    }
+
+    .fila .txt-input,
+    .hora,
+    .lista {
+        width: 100%;
+        margin-left: 0rem;
+    }
+
+    .fila .datos {
+        width: 100%;
+    }
+
+    .img-portada {
+        width: 100%;
+    }
+
+    .carousel-item {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .carousel-item {
+        height: 230px;
+    }
+}

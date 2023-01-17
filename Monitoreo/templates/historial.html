@@ -1,109 +1,122 @@
 {% extends 'home.html' %}
-{% load static%}
-{% block title %}Historial | {% endblock title %}
-{% block subcontenedor %}
-<h4>Historial</h4>
-<div class="row mt-4">
-    <form class="row mb-4" action="/buscar-historial/" method="POST" id="formRegistroUsuario" name="formRegistroUsuario">
+{% load static %}
+
+{% block title %}Historial - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div class="titulo">Historial</div>
+<div>
+    <form class="row mb-3 mt-3" action="/buscar-historial/" method="POST" id="formRegistroUsuario"
+        name="formRegistroUsuario">
         {% csrf_token %}
         <div class="col-sm-2">
-            <input type="date" class="form-control" id="dtmFechaHistorial" name="dtmFechaHistorial" value="{{ fechaSeleccionada }}" />
+            <input type="date" class="form-control" id="dtmFechaHistorial" name="dtmFechaHistorial"
+                value="{{ fechaSeleccionada }}" />
         </div>
         <div class="col-sm-2">
             <select id="expresion-facial" name="expresion-facial" class="form-control custom-select text-center">
                 {% if expresionSelected == 'Todas' %}
-                    <option value="Todas" selected>Todas las expresiones</option>
+                <option value="Todas" selected>Todas las expresiones</option>
                 {% else %}
-                    <option value="Todas">Todas las expresiones</option>
+                <option value="Todas">Todas las expresiones</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Asustado' %}
-                    <option value="Asustado" selected>Asustado</option>
+                <option value="Asustado" selected>Asustado</option>
                 {% else %}
-                    <option value="Asustado">Asustado</option>
+                <option value="Asustado">Asustado</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Enfadado' %}
-                    <option value="Enfadado" selected>Enfadado</option>
+                <option value="Enfadado" selected>Enfadado</option>
                 {% else %}
-                    <option value="Enfadado">Enfadado</option>
+                <option value="Enfadado">Enfadado</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Disgustado' %}
-                    <option value="Disgustado" selected>Disgutado</option>
+                <option value="Disgustado" selected>Disgutado</option>
                 {% else %}
-                    <option value="Disgustado">Disgustado</option>
+                <option value="Disgustado">Disgustado</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Feliz' %}
-                    <option value="Feliz" selected>Feliz</option>
+                <option value="Feliz" selected>Feliz</option>
                 {% else %}
-                    <option value="Feliz">Feliz</option>
+                <option value="Feliz">Feliz</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Neutral' %}
-                    <option value="Neutral" selected>Neutral</option>
+                <option value="Neutral" selected>Neutral</option>
                 {% else %}
-                    <option value="Neutral">Neutral</option>
+                <option value="Neutral">Neutral</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Sorprendido' %}
-                    <option value="Sorprendido" selected>Sorprendido</option>
+                <option value="Sorprendido" selected>Sorprendido</option>
                 {% else %}
-                    <option value="Sorprendido">Sorprendido</option>
+                <option value="Sorprendido">Sorprendido</option>
                 {% endif %}
 
                 {% if expresionSelected == 'Triste' %}
-                    <option value="Triste" selected>Triste</option>
+                <option value="Triste" selected>Triste</option>
                 {% else %}
-                    <option value="Triste">Triste</option>
+                <option value="Triste">Triste</option>
                 {% endif %}
             </select>
         </div>
         <div class="col-sm-1">
-            <button class="btn btn-secondary btn-sm mt-1" type="submit" title="Buscar"><i class="fas fa-search"></i></button>
+            <button class="btn btn-secondary btn-sm mt-1" type="submit" title="Buscar"><i
+                    class="fas fa-search"></i></button>
         </div>
     </form>
-    <div class="table-responsive-sm">
-    <table class="table table-hover table-sm align-middle table-bordered text-center">
-        <thead class="table-secondary">
-        <tr>
-            <th scope="col">Expresión facial</th>
-            <th scope="col">Fecha y hora</th>
-            <th scope="col">Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for h in historial %}
-            <tr>
-                <td>{{ h.expresion_facial }}</td>
-                <td>{{ h.fecha_hora|date:'l d-m-Y H:i' }}</td>
-                <td>
-                    <button type="button" class="btn btn-outline-info btn-sm" onclick="javascript:verFotoHistorial('{{ h.imagen_expresion.url}}', '{{ h.expresion_facial}}')"
-                    title="Ver foto de expresión"><i class="fas fa-eye"></i></button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div id="verFotoHistorial" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h6 class="modal-title" id="exampleModalLabel"></h6>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div style="white-space: nowrap; overflow-x: auto;" class="modal-body text-center">
-            <img class="row m-2" id="fotoHistorial" >
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i class="fas fa-times"></i> Salir</button>
-        </div>
+    <div class="card table-responsive-sm">
+        <table class="table table-hover table-sm align-middle table-bordered text-center">
+            <thead class="table-secondary">
+                <tr>
+                    <th scope="col">Expresión facial</th>
+                    <th scope="col">Fecha y hora</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in historial %}
+                <tr>
+                    <td>{{ h.expresion_facial }}</td>
+                    <td>{{ h.fecha_hora|date:'l d-m-Y H:i' }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-info btn-sm"
+                            onclick="javascript:verFotoHistorial('{{ h.imagen_expresion.url}}', '{{ h.expresion_facial}}')"
+                            title="Ver foto de expresión"><i class="fas fa-eye"></i></button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="verFotoHistorial" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel"></h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div style="white-space: nowrap; overflow-x: auto;" class="modal-body text-center">
+                    <img class="row m-2" id="fotoHistorial">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal"><i
+                            class="fas fa-times"></i> Salir</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-{% endblock %} 
+{% endblock content %}
 {% block js %}
-<script src="{% static '/dainattor/js/historial.js'%}"></script>
-{% endblock %}  
+<script src="{% static '/js/dainattor/historial.js'%}"></script>
+{% endblock %}

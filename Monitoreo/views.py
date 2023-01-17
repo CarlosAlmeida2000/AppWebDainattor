@@ -18,7 +18,7 @@ def vwConfiguracion(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
-    return render(request, 'configuracion.html', {'configuracion': 'activate-menu'})
+    return render(request, 'configuracion.html', {'configuracion': 'activado'})
 
 # Vista que guardar una foto para el entrenamiento facial
 def vwCaptRostroEntrena(request):
@@ -48,7 +48,7 @@ def vwHistorial(request):
     if not request.session.get('usuarioId'):
         return redirect('/')
     historial = Historial.objects.filter(usuario_id = request.session.get('usuarioId'))
-    return render(request, 'historial.html', {'historial': historial, 'opc_historial': 'activate-menu'})
+    return render(request, 'historial.html', {'historial': historial, 'opc_historial': 'activado'})
 
 # Vista para filtrar historial de monitoreo
 def vwBuscarHistorial(request):
@@ -60,14 +60,14 @@ def vwBuscarHistorial(request):
         historial = Historial.objects.filter(Q(usuario_id = request.session.get('usuarioId')) & Q(fecha_hora__lte = fecha))
     else:
         historial = Historial.objects.filter(Q(usuario_id = request.session.get('usuarioId')) & Q(expresion_facial = request.POST['expresion-facial']) & Q(fecha_hora__lte = fecha))
-    return render(request, 'historial.html', {'historial': historial, 'expresionSelected': request.POST['expresion-facial'], 'fechaSeleccionada': request.POST['dtmFechaHistorial'], 'opc_historial': 'activate-menu'})
+    return render(request, 'historial.html', {'historial': historial, 'expresionSelected': request.POST['expresion-facial'], 'fechaSeleccionada': request.POST['dtmFechaHistorial'], 'opc_historial': 'activado'})
 
 # Vista para renderizar la plantilla de recomendaciones
 def vwReporte(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
-    return render(request, 'reporte.html', {'reporte': 'activate-menu'})
+    return render(request, 'reporte.html', {'reporte': 'activado'})
 
 # Vista que retorna los datos para el gráfico en barra
 def vwGrafico(request):

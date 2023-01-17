@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-EC">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap_4.6.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/base/header02.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/global/footer.css' %}">
+    <link rel="icon" href="{% static 'img/doctor.jpg' %}" type="image/png" />
+
+    <title>{% block title %}{% endblock title %}Software Dainattor</title>
+
+    {% block css %}{% endblock css %}
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark pt-0 pb-0">
+            <button class="navbar-toggler navbar-tablet" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" style="height: 50px;">
+                <i class="fas fa-bars"></i>
+                <h6 class="mb-0 nombre-pagina-tablet">Software Dainattor</h6>
+                <img src="{% static 'img/doctor.jpg' %}" height="40px" alt="Logo">
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand d-flex align-items-center justify-content-center" href="#">
+                    <img src="{% static 'img/doctor.jpg' %}" height="40px" alt="Logo">
+                    <h4 class="ml-2 mb-0 nombre-pagina">Software Dainattor</h4>
+                </a>
+                {% block navbar %} {% endblock navbar %}
+            </div>
+        </nav>
+    </header>
+    <main class="container-hu">
+        {% block content %} {% endblock content %}
+    </main>
+
+    {% include 'components/footer.html' %}
+
+    <script src="{% static 'js/jquery/jquery-3.4.1.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/sweetalert/sweetalert_2_v10.js' %}"></script>
+
+    {% block js %} {% endblock js %}
+</body>
+
+</html>

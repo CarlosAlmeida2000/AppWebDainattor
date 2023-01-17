@@ -10,14 +10,15 @@
         padding-top: 60px;
     }
 </style>
-    {% endblock %} 
+{% endblock %}
 {% block contenedor %}
 
 <div class="row g-3" style="margin: 20px;">
     <div class="col-md-7">
         <h2>Bienvenido a Dainattor</h2>
         <h5 class="fs-4 display-6">
-            Un software que brinda predicciones de un posible trastorno emocional mediante el análisis de las expresiones faciales
+            Un software que brinda predicciones de un posible trastorno emocional mediante el análisis de las
+            expresiones faciales
         </h5>
         <img src=" {% static 'img/doctor.jpg' %} " alt="" width="450px" class="mx-auto d-block">
     </div>
@@ -33,7 +34,8 @@
                 <label for="txtClave" class="form-label">Contraseña</label>
                 <input type="password" class="form-control" id="txtClave" name="txtClave" placeholder="***********">
             </div>
-            <button id="iniciarSesion" class="btn btn-primary" type="submit"><i class="fas fa-unlock"></i> Iniciar sesión</button>
+            <button id="iniciarSesion" class="btn btn-primary" type="submit"><i class="fas fa-unlock"></i> Iniciar
+                sesión</button>
             <div class="log-links">
                 <div class="mt-1">
                     Si no tienes un cuenta de inicio de sesión
@@ -47,5 +49,5 @@
 </div>
 {% endblock %}
 {% block js %}
-<script src="{% static '/dainattor/js/persona.js'%}"></script>
-{% endblock %}  
+<script src="{% static '/js/dainattor/persona.js'%}"></script>
+{% endblock %}

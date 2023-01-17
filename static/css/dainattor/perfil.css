@@ -1,0 +1,46 @@
+label[for="imgFotoPerfil"],
+input.guardar {
+    margin: 10px;
+}
+
+input[type="file"]#imgFotoPerfil {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for="imgFoto"],
+input.guardar {
+    margin: 10px;
+}
+
+input[type="file"]#imgFoto {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for="imgFotoCarousel"],
+input.guardar {
+    margin: 10px;
+}
+
+input[type="file"]#imgFotoCarousel {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.btn-perfil,
+.btn-portada {
+    display: none;
+}

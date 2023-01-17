@@ -1,0 +1,100 @@
+.container-hu {
+  display: flex;
+  align-items: center;
+}
+
+.log-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 10px;
+  align-items: center;
+  justify-items: center;
+}
+
+.log {
+  border: 2px solid #c5c5c5;
+  border-radius: 10px;
+  padding: 2.2rem;
+}
+
+.log h3 {
+  text-align: center;
+}
+
+.img-portada {
+  width: 400px;
+}
+
+.log-f-input,
+.log-f-label {
+  display: block;
+}
+
+.log-links {
+  font-size: 15px;
+}
+
+.log-f-input,
+.log-f-enviar {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.log-f-label {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin: 15px 0px 0px 0px;
+}
+
+.log-f-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #c5c5c5;
+}
+
+.log-f-input:focus {
+  border-color: black;
+  outline: none;
+}
+
+.log-click {
+  cursor: pointer;
+  text-align: center;
+}
+
+.log-img-container {
+  width: 200px;
+  height: 250px;
+  padding: 2rem;
+  border: 2px dashed rgba(65, 77, 95, 0.3);
+  background-color: aliceblue;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.camera {
+  font-size: 50px;
+}
+
+@media (max-width: 1020px){
+  .log {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .log-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .log {
+    padding: 0;
+    border: none;
+  }
+
+  .log-img {
+    display: none;
+  }
+}

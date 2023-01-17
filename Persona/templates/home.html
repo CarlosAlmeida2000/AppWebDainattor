@@ -1,55 +1,101 @@
-{% extends 'index.html' %}
-{% load static%}
-{% block title %}{% endblock title %}
-{% block css %}
-<style>
-    #nav-lateral{
-        border-right: 1px solid rgb(128, 128, 128);
-    }
-    .cont{
-        padding: 20px;
-    }
-    .opc-nav{
-        text-decoration: none;
-        display: block;
-        color: rgb(134, 134, 134);
-        border: 1px solid rgb(124, 124, 124);
-        padding: 10px;
-        margin: 10px;
-        border-radius: 24px;
-    }
-    .opc-nav:hover{
-        background-color: #3E4F87;
-        color: white;
-    }
-    .activate-menu{
-        background-color: #3E4F87;
-        color: white;
-    }
-    html,body{
-        height: 100%;
-    }
-    #contenedor{
-        height: 90%;
-        margin: 0;
-    }
-</style>
-{% endblock %}
-{% block contenedor %}
-<div class="row g-3" id="contenedor">
-    <div class="col-md-2 cont" id="nav-lateral">
-        <img src="{{ request.session.fotoPerfil }}" class="img-thumbnail mx-auto d-block" title="Foto de perfil" alt="Foto de perfil" style="border-radius: 50%; height: 100px; width: 100px;">
-        <p class="text-center">{{ request.session.nombres }}</p>
-        <a href="{% url 'configuracion' %}" class="opc-nav text-center {{ configuracion }}"><i class="fa fa-cog"> </i> Configuración</a>
-        <a href="{% url 'historial' %}" class="opc-nav text-center {{ opc_historial }}"><i class="fas fa-book-open"> </i> Historial</a>
-        <a href="{% url 'reporte' %}" class="opc-nav text-center {{ reporte }}"><i class="fas fa-list-ol"> </i> Reporte</a>
-        <a href="{% url 'perfil' %}" class="opc-nav text-center {{ perfil }}"><i class="fas fa-user"> </i> Perfil</a>
-        <a href="{% url 'logout' %}" class="opc-nav text-center"><i class="fas fa-window-close"> </i> Cerrar sesión</a>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-EC">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap_4.6.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/dainattor/perfil-box.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido-responsive.css' %}" />
+    <link rel="icon" href="{% static 'img/doctor.jpg' %}" type="image/png" />
+    
+    <title>{% block title %}{% endblock title %}Software Dainattor</title>
+    {% block css %} {% endblock css %}
+</head>
+
+<body>
+    <div class="control-negocio">
+        <div class="barra-lateral">
+            <div class="perfil-box">
+                <div class="img-perfil">
+                    {% if request.session.fotoPerfil %}
+                    <img src="{{ request.session.fotoPerfil }}">
+                    {% else %}
+                    <img src="{% static 'img/doctor.jpg' %}">
+                    {% endif %}
+                </div>
+                <p class="nombre-empresa">{{ request.session.nombres }}</p>
+            </div>
+            <div class="opciones">
+                <a class="btn-opcion {{ configuracion }}" href="{% url 'configuracion' %}">
+                    <i class="fa fa-cog"></i>
+                    <span>Configuración<span>
+                </a>
+                <a class="btn-opcion {{ opc_historial  }}" href="{% url 'historial' %}">
+                    <i class="fas fa-book-open"></i>
+                    <span>Historial</span>
+                </a>
+                <a class="btn-opcion {{ reporte  }}" href="{% url 'reporte' %}">
+                    <i class="fas fa-list-ol"></i>
+                    <span>Reporte</span>
+                </a>
+                <a class="btn-opcion {{ perfil }}" href="{% url 'perfil' %}">
+                    <i class="fas fa-user"></i>
+                    <span>Perfil</span>
+                </a>
+                <a class="btn-opcion" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a class="dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="dropdown-menu" id="btn-opciones" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item btn-opcion" href="{% url 'configuracion' %}">
+                        <i class="fa fa-cog"></i>
+                        <span>Configuración<span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'historial' %}">
+                        <i class="fas fa-book-open"></i>
+                        <span>Historial</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'reporte' %}">
+                        <i class="fas fa-list-ol"></i>
+                        <span>Reporte</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'perfil' %}">
+                        <i class="fas fa-user"></i>
+                        <span>Perfil</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-contenido">
+            {% block content %} {% endblock content %}
+        </div>
     </div>
-    <div class="col-md-10 cont"> 
-        {% block subcontenedor %}
-            <img src=" {% static 'img/doctor.jpg' %} " alt="" width="500px" class="mx-auto d-block">
-            {% endblock %}
-    </div>
-</div>
-{% endblock %}
+
+    <script src="{% static 'js/jquery/jquery-3.4.1.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/sweetalert/sweetalert_2_v10.js'%}"></script>
+    <script src="{% static 'js/sweetalert/sweetalert.min.js'%}"></script>
+
+    <script src="{% static '/js/dainattor/global.js'%}"></script>
+
+    {% block js %}
+    {% endblock js %}
+
+</body>
+
+</html>

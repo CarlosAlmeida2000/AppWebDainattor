@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/global/ini_reg.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/dainattor/ini_reg.css' %}" type="text/css">
 {% endblock css %}
 
 
@@ -14,7 +14,7 @@
         </div>
         <div class="log">
             <h3>Crear cuenta de usuario</h3>
-            <form method="POST" id="formLogin" class="log-form row" id="formRegistroUsuario" name="formRegistroUsuario">
+            <form method="POST" class="log-form row" id="formRegistroUsuario" name="formRegistroUsuario">
                 {% csrf_token %}
                 <div class="col-sm">
                     <div class="mb-3">

@@ -1,6 +1,7 @@
 .container-hu {
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-items: center;
 }
 
 .log-container {

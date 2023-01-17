@@ -12,6 +12,17 @@
   justify-items: center;
 }
 
+.btn-login, .btn-create-user{
+  color: white;
+  border: none;
+  background-color: #3a89a3;
+}
+
+.btn-login:hover, .btn-create-user:hover{
+  color: white;
+  background-color: #2a6275;
+}
+
 .log {
   border: 2px solid #c5c5c5;
   border-radius: 10px;

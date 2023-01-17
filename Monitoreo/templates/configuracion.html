@@ -4,7 +4,7 @@
 {% block title %}Configuración - {% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+<link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido.css' %}" />
 {% endblock css %}
 
 {% block content %}
@@ -17,9 +17,9 @@
             </div>
             <div class="row">
                 <div class="col-5 form-check form-switch m-3">
-                    <input class="form-check-input" type="checkbox" role="switch" id="switchEntrenamiento"
+                    <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="switchEntrenamiento"
                         name="switchVideo" />
-                    <label class="form-check-label" for="switchEntrenamiento">Iniciar Entrenamiento</label>
+                    <label class="form-check-label cursor-pointer" for="switchEntrenamiento">Iniciar Entrenamiento</label>
                 </div>
                 <div class="col-5 m-3" id="estado-entrenamiento">Fotos capturadas: </div>
             </div>
@@ -30,7 +30,7 @@
             </div>
             <div class="row mt-4">
                 <div class="col-3">
-                    <select id="tiempo-monitoreo" class="form-control custom-select text-center">
+                    <select id="tiempo-monitoreo" class="form-control custom-select text-center cursor-pointer">
                         <option value="15" selected>15 segundos</option>
                         <option value="30">30 segundos</option>
                         <option value="45">45 segundos</option>
@@ -38,9 +38,9 @@
                     </select>
                 </div>
                 <div class="col-4 form-check form-switch">
-                    <input class="form-check-input m-6" type="checkbox" role="switch" id="switchMonitoreo"
+                    <input class="form-check-input m-6 cursor-pointer" type="checkbox" role="switch" id="switchMonitoreo"
                         name="switchMonitoreo" />
-                    <label class="form-check-label" for="switchMonitoreo">Iniciar Monitoreo</label>
+                    <label class="form-check-label cursor-pointer" for="switchMonitoreo">Iniciar Monitoreo</label>
                 </div>
                 <div class="reloj col-5" id="tiempo">Reloj: 00:00:00</div>
             </div>

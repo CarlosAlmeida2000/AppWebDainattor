@@ -51,7 +51,7 @@
                     </div>
                 </div>
 
-                <button id="btnCrearCuenta" class="log-f-enviar btn btn-success" type="submit"
+                <button id="btnCrearCuenta" class="log-f-enviar btn btn-create-user" type="submit"
                     form="formRegistroUsuario"><i class="fas fa-save"></i> Crear cuenta</button>
                 <div class="log-links">
                     <div class="mt-1">
@@ -66,6 +66,11 @@
     </div>
 </main>
 {% endblock content %}
+
+{% block content2 %} 
+{% include 'components/footer.html' %}
+{% endblock content2 %}
+
 {% block js %}
 <script src="{% static '/js/dainattor/persona.js'%}"></script>
 {% endblock js %}

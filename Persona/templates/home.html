@@ -20,7 +20,8 @@
     <div class="control-negocio">
         <div class="barra-lateral">
             <div class="perfil-box">
-                <div class="img-perfil">
+                <h5 class="nombre-empresa text-white">Software Dainattor</h5>
+                <div class="img-perfil mt-4">
                     {% if request.session.fotoPerfil %}
                     <img src="{{ request.session.fotoPerfil }}">
                     {% else %}
@@ -92,6 +93,13 @@
     <script src="{% static 'js/sweetalert/sweetalert.min.js'%}"></script>
 
     <script src="{% static '/js/dainattor/global.js'%}"></script>
+
+    <script>
+        // Cargar el sumario luego de pasar por el login y así no se muestre vacío el panel, hasta que seleccione una opción del menú
+        if ($('.panel-contenido').find("div").val() == undefined) {
+            location.href = '/configuracion/'
+        }
+    </script>
 
     {% block js %}
     {% endblock js %}

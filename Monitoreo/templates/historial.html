@@ -4,7 +4,7 @@
 {% block title %}Historial - {% endblock title %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+<link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido.css' %}" />
 {% endblock css %}
 
 {% block content %}
@@ -14,11 +14,11 @@
         name="formRegistroUsuario">
         {% csrf_token %}
         <div class="col-sm-2">
-            <input type="date" class="form-control" id="dtmFechaHistorial" name="dtmFechaHistorial"
+            <input type="date" class="form-control cursor-pointer" id="dtmFechaHistorial" name="dtmFechaHistorial"
                 value="{{ fechaSeleccionada }}" />
         </div>
         <div class="col-sm-2">
-            <select id="expresion-facial" name="expresion-facial" class="form-control custom-select text-center">
+            <select id="expresion-facial" name="expresion-facial" class="form-control custom-select text-center cursor-pointer">
                 {% if expresionSelected == 'Todas' %}
                 <option value="Todas" selected>Todas las expresiones</option>
                 {% else %}
@@ -68,9 +68,9 @@
                 {% endif %}
             </select>
         </div>
-        <div class="col-sm-1">
-            <button class="btn btn-secondary btn-sm mt-1" type="submit" title="Buscar"><i
-                    class="fas fa-search"></i></button>
+        <div class="col-sm-2">
+            <button class="btn btn-primary btn-sm mt-1" type="submit" title="Buscar"><i
+                    class="fas fa-search"></i> Buscar</button>
         </div>
     </form>
     <div class="card table-responsive-sm">

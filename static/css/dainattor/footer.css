@@ -6,9 +6,10 @@
 
 .footer {
     width: 100%;
-    background-color: rgba(131, 198, 192, 0.468);
-    margin-top: 3.3rem;
+    background-color: #2a6275;
+    margin-top: 3.5rem;
     padding: 1rem;
+    color: white;
 }
 
 .footer-grid {
@@ -21,7 +22,7 @@
 
 .mail {
     padding-right: 0.5rem;
-    color: black;
+    color: white;
 }
 
 .item-conteiner {
@@ -33,13 +34,13 @@
 }
 
 .item > a {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
 .item > a:hover {
-    color: rgb(145, 145, 145);
-    text-decoration: rgb(145, 145, 145) underline;
+    color: greenyellow;
+    text-decoration: greenyellow underline;
 }
 
 @media (max-width: 700px) {

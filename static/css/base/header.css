@@ -1,7 +1,7 @@
 :root {
-  --color_morado: #0e0c66;
   --color_blanco: #f9f9f9;
-  --color_verde: rgb(47, 118, 42);
+  --color_azul: #0e0c66;
+  --color_header: #2a6275;
 }
 
 body {
@@ -9,16 +9,16 @@ body {
 }
 
 header {
-  background-color: var(--color_blanco);
+  background-color: var(--color_header);
   width: 100% !important;
-  box-shadow: 0px 4px 4px 0px rgba(14, 12, 102, 0.25);
+  box-shadow: 0px 3px 3px 0px #267a97;
 }
 
 .navbar {
   width: 95% !important;
   padding: 0px !important;
   margin: auto;
-  color: var(--color_verde) !important;
+  color: var(--color_azul) !important;
 }
 
 .navbar-collapse {
@@ -27,18 +27,18 @@ header {
 
 .btn-light,
 .nombre-pagina {
-  color: var(--color_verde) !important;
-  background-color: var(--color_blanco);
+  color: white !important;
+  background-color: var(--color_header);
 }
 
 .btn-verde {
-  background-color: var(--color_verde);
+  background-color: var(--color_azul);
   color: var(--color_blanco) !important;
 }
 
 .btn-light,
 .btn-verde {
-  border: 1px solid var(--color_verde);
+  border: 1px solid var(--color_azul);
   border-radius: 30px;
   padding: 0.55rem 1.3rem !important;
   margin-left: 0.7rem !important;
@@ -48,7 +48,7 @@ header {
 .btn-light:hover,
 .btn-verde:hover {
   box-shadow: 0px 0px 3px 3px rgba(47, 118, 42, 0.4);
-  color: var(--color_verde) !important;
+  color: var(--color_azul) !important;
   background-color: var(--color_blanco);
   cursor: pointer;
   transition: ease-in-out 0.16s;
@@ -59,11 +59,11 @@ header {
 }
 
 i.fas.fa-bars {
-  color: var(--color_verde) !important;
+  color: var(--color_azul) !important;
 }
 
 .btn-light-nav {
-  color: var(--color_verde) !important;
+  color: var(--color_azul) !important;
   padding: 0.5rem 1rem !important;
   text-decoration: none !important;
   text-align: center;
@@ -81,12 +81,6 @@ i.fas.fa-bars {
   background-color: transparent;
   text-align: left;
 }
-.btn-drop-nav:hover {
-  background-color: rgba(47, 118, 42, 0.8);
-  color: var(--color_blanco) !important;
-  cursor: pointer;
-  transition: ease 0.16s;
-}
 
 .user-perfil {
   width: 30px;
@@ -95,33 +89,19 @@ i.fas.fa-bars {
 }
 
 @media screen and (max-width: 991px) {
-  /* .btn-light,
-  .btn-verde {
-    color: var(--color_verde) !important;
-    background-color: var(--color_blanco);
-    border: none;
-    border-radius: initial;
-    font-size: 0.9rem;
-  }
-
-  .btn-light:hover,
-  .btn-verde:hover {
-    background-color: rgba(103, 158, 240, 0.88);
-    color: var(--color_blanco) !important;
-    box-shadow: none;
-  }*/
 
   header > .navbar > div.navbar-collapse > a.navbar-brand {
     display: none !important;
   }
 
   .navbar-tablet {
+    color: white;
     width: 100%;
     display: flex;
     align-items: center;
   }
   .navbar-tablet > .nombre-pagina-tablet {
-    color: #252525;
+    color: white;
     width: 100%;
     text-align: center;
   }
@@ -150,7 +130,7 @@ i.fas.fa-bars {
   .btn-light-nav:hover,
   .btn-drop-nav:hover{
     box-shadow: none;
-    background-color: var(--color_verde);
+    background-color: var(--color_azul);
     color: var(--color_blanco) !important;
     border-radius: none;
     border: none;

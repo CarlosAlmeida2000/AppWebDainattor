@@ -1,5 +1,5 @@
 :root {
-    --color_verde_turquesa: #2a7557;
+    --color_verde_turquesa: #2a6275;
     --color_amarillo: #fef200;
     --color_verde: #2f762a;
     --color_rojo: #ed1b24;
@@ -9,17 +9,22 @@
     --alto_colores: 12px;
 }
 
+.cursor-pointer{
+    cursor: pointer;
+}
+
 .control-negocio,
 .admin-web {
     display: flex;
+    height: 100%;
 }
 
 .barra-lateral {
     background-color: var(--color_verde_turquesa);
-    width: 15rem;
     min-width: 15rem;
-    height: 100%;
+    width: 15rem;
     position: fixed;
+    height: 100%;
 }
 
 .panel-contenido {
@@ -60,27 +65,6 @@
     padding: 0.5rem 0rem;
 }
 
-.perfil-box .colores-macara {
-    display: flex;
-    align-items: center;
-    border: 2px solid #ffffff8c;
-}
-.perfil-box .colores-macara div.color-amarillo {
-    background-color: var(--color_amarillo);
-    width: var(--ancho_colores);
-    height: var(--alto_colores);
-}
-.perfil-box .colores-macara div.color-verde {
-    background-color: var(--color_verde);
-    width: var(--ancho_colores);
-    height: var(--alto_colores);
-}
-.perfil-box .colores-macara div.color-rojo {
-    background-color: var(--color_rojo);
-    width: var(--ancho_colores);
-    height: var(--alto_colores);
-}
-
 /*********** OPCIONES ***********/
 .barra-lateral .opciones .btn-opcion {
     text-decoration: none;
@@ -94,8 +78,9 @@
     width: 100%;
 }
 .barra-lateral .opciones .btn-opcion:hover {
-    background-color: #3a9c74;
-    border-left: 7px solid #dea702;
+    background-color: #3a929c;
+    border-left: 7px solid #79ccaf;
+    border-right: 7px solid #79ccaf;
     transition: ease-in-out 0.25s;
 }
 .barra-lateral .opciones .btn-opcion i {
@@ -105,8 +90,9 @@
 }
 
 .activado {
-    background-color: #3a9c74 !important;
-    border-left: 7px solid #dea702 !important;
+    background-color: #3a929c !important;
+    border-left: 7px solid #79ccaf !important;
+    border-right: 7px solid #79ccaf !important;
 }
 
 .nav-item.dropdown {
@@ -159,7 +145,7 @@
     }
     #btn-opciones {
         width: 100%;
-        background-color: #2a7557;
+        background-color: var(--color_verde_turquesa);
         left: 4px;
     }
     .barra-lateral .btn-opcion {

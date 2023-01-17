@@ -21,7 +21,7 @@ def vwHome(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'configuracion': 'activado'})
 
 # Vista para iniciar sesión
 def IniciarSesion(request):

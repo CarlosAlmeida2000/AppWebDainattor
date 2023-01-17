@@ -22,7 +22,7 @@
             <button class="navbar-toggler navbar-tablet" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation" style="height: 50px;">
-                <i class="fas fa-bars"></i>
+                <i style="background-color: white;" class="fas fa-bars"></i>
                 <h6 class="mb-0 nombre-pagina-tablet">Software Dainattor</h6>
                 <img src="{% static 'img/doctor.jpg' %}" height="40px" alt="Logo">
             </button>
@@ -31,7 +31,6 @@
                     <img src="{% static 'img/doctor.jpg' %}" height="40px" alt="Logo">
                     <h4 class="ml-2 mb-0 nombre-pagina">Software Dainattor</h4>
                 </a>
-                {% block navbar %} {% endblock navbar %}
             </div>
         </nav>
     </header>
@@ -39,8 +38,7 @@
         {% block content %} {% endblock content %}
     </main>
 
-    {% include 'components/footer.html' %}
-
+    {% block content2 %} {% endblock content2 %}
     <script src="{% static 'js/jquery/jquery-3.4.1.min.js'%}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/sweetalert/sweetalert_2_v10.js' %}"></script>

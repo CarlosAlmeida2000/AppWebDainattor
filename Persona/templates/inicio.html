@@ -7,11 +7,12 @@
 
 {% block content %}
 <main>
-    <div class="log-container">
+    <div class="log-container mt-5" style="margin-bottom: 2.9em;">
         <div class="log-img">
+            <p>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de las expresiones faciales.</p>
             <img src="{% static 'img/doctor.jpg' %}" alt="" class="img-portada">
         </div>
-        <div class="log">
+        <div class="log mx-5">
             <h3>!Hola! bienvenido a Dainattor</h3>
             <form method="POST" id="formLogin" class="log-form">
                 {% csrf_token %}
@@ -22,7 +23,7 @@
                 <button id="iniciarSesion" class="log-f-enviar btn btn-login" type="submit"><i class="fas fa-sign-out-alt"></i> Iniciar</button>
             </form>
             <div class="log-links">
-                <div class="mt-1">
+                <div class="mt-2">
                     Si no tienes un cuenta de inicio de sesión
                     <a href="{% url 'registro' %}">
                         registrate aquí.

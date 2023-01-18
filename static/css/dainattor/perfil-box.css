@@ -13,6 +13,21 @@
     cursor: pointer;
 }
 
+.border-sombra{
+    border-radius: 18px;
+    box-shadow: 1px 1px 1px 1px #81949a;
+}
+
+.left-6{
+    left: 6%;
+    margin-top: 20px;
+}
+
+.left-3{
+    left: 3%;
+    margin-top: 38px;
+}
+
 .control-negocio,
 .admin-web {
     display: flex;

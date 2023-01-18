@@ -7,12 +7,13 @@
 
 
 {% block content %}
-<main>
-    <div class="log-container">
+<main class="mt-3">
+    <div class="log-container mt-4 mb-2">
         <div class="log-img">
+            <p>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de las expresiones faciales.</p>
             <img src="{% static 'img/doctor.jpg' %}" alt="" class="img-portada">
         </div>
-        <div class="log">
+        <div class="log mx-5">
             <h3>Crear cuenta de usuario</h3>
             <form method="POST" class="log-form row" id="formRegistroUsuario" name="formRegistroUsuario">
                 {% csrf_token %}

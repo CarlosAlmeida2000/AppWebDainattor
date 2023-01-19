@@ -7,19 +7,25 @@
 
 {% block content %}
 <main>
-    <div class="log-container" style="margin-bottom: 3.1em; margin-top: 8em;">
+    <div class="log-container" style="margin-bottom: 3.1em; margin-top: 7em;">
         <div class="log-img">
-            <p>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de las expresiones faciales.</p>
-            <img src="{% static 'img/doctor.jpg' %}" alt="" class="img-portada">
+            <h3>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de un historial de expresiones faciales del rostro.</h3>
+            <img src="{% static 'img/doctor.jpg' %}" alt="Foto de portada" class="img-portada mt-5">
         </div>
         <div class="log mx-5">
             <h3>!Hola! bienvenido a Dainattor</h3>
             <form method="POST" id="formLogin" class="log-form">
                 {% csrf_token %}
-                <label for="validacion_usuario" class="log-f-label">Usuario</label>
-                <input type="text" id="validacion_usuario" name="txtUsuario" autocomplete="off" class="log-f-input">
-                <label for=" validacion_credenciales" class="log-f-label">Contraseña</label>
-                <input type="password" id="validacion_credenciales" name="txtClave" class="log-f-input">
+                <label for="txtUsuario" class="log-f-label">Usuario</label>
+                <input type="text" id="txtUsuario" name="txtUsuario" autocomplete="off" class="log-f-input">
+                <div class="mb-3">
+                    <label for=" txtClave" class="log-f-label">Contraseña</label>
+                    <div class="row">
+                        <input type="password" class="log-f-input col mx-3" id="txtClave" name="txtClave"
+                        placeholder="***********" />
+                        <button id="verClave" name="verClave" class="btn btn-primary col-sm-2 mx-3 verClave" onclick="javascript:mostrarValor(txtClave);" type="button"><i class="fas fa-eye"></i></button>
+                    </div>
+                </div>
                 <button id="iniciarSesion" class="log-f-enviar btn btn-login" type="submit"><i class="fas fa-sign-out-alt"></i> Iniciar</button>
             </form>
             <div class="log-links">

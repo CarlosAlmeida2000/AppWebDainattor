@@ -4,6 +4,11 @@
   justify-items: center;
 }
 
+.verClave{
+  height: 35px;
+  width: 20px;
+}
+
 .log-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -16,6 +21,10 @@
   color: white;
   border: none;
   background-color: #3a89a3;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .btn-login:hover, .btn-create-user:hover{

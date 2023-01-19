@@ -19,10 +19,13 @@
                     class="form-control" id="txtNombres" name="txtNombres" placeholder="nombres" maxlength="70"
                     required />
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="txtCedula" class="form-label">Cédula</label>
-                <input type="text" value="{{ unUsuario.persona.cedula }}" form="formModificaroUsuario"
-                    class="form-control" id="txtCedula" name="txtCedula" placeholder="cédula" maxlength="10" required />
+                <div class="row">
+                    <input type="password" value="{{ unUsuario.persona.cedula }}" form="formModificaroUsuario"
+                    class="form-control col mx-3" id="txtCedula" name="txtCedula" placeholder="cédula" maxlength="10" required />
+                    <button id="verClave" name="verClave" class="btn btn-primary col-sm-1 mx-3 verClave" onclick="javascript:mostrarValor(txtCedula);" type="button"><i class="fas fa-eye"></i></button>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="dtmFechaNaci" class="form-label">Fecha de nacimiento</label>
@@ -36,13 +39,19 @@
             </div>
             <div class="mb-3">
                 <label for="txtClave" class="form-label">Contraseña</label>
-                <input type="password" form="formModificaroUsuario" class="form-control" id="txtClave" name="txtClave"
+                <div class="row">
+                    <input type="password" form="formModificaroUsuario" class="form-control col mx-3" id="txtClave" name="txtClave"
                     placeholder="***********" />
+                    <button id="verClave" name="verClave" class="btn btn-primary col-sm-1 mx-3 verClave" onclick="javascript:mostrarValor(txtClave);" type="button"><i class="fas fa-eye"></i></button>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="txtClave2" class="form-label">Repita la contraseña</label>
-                <input type="password" form="formModificaroUsuario" class="form-control" id="txtClave2" name="txtClave2"
+                <div class="row">
+                    <input type="password" form="formModificaroUsuario" class="form-control col mx-3" id="txtClave2" name="txtClave2"
                     placeholder="***********" />
+                <button id="verClave" name="verClave" class="btn btn-primary col-sm-1 mx-3 verClave" onclick="javascript:mostrarValor(txtClave2);" type="button"><i class="fas fa-eye"></i></button>
+                </div>
             </div>
             <button id="btnModificarCuenta" class="btn btn-success" type="submit" form="formModificaroUsuario"><i
                     class="fas fa-save"></i> Guardar cambios</button>

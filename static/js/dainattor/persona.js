@@ -1,3 +1,12 @@
+function mostrarValor(tipo){
+//    var tipo = document.getElementById("txtClave");
+    if(tipo.type == "password"){
+        tipo.type = "text";
+    }else{
+        tipo.type = "password";
+    }
+}
+
 // sobrescritura del submit del formulario registrar usuario
 $(document).ready(function () {
     $("#formRegistroUsuario").submit(function (e) {

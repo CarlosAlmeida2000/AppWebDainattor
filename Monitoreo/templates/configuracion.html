@@ -13,23 +13,28 @@
     <div class="card col-sm-5 border-sombra left-3 pt-2">
         <div>
             <div class="border-bottom mt-3">
-                <h6>Entrenamiento facial</h6>
+                <h6><i class="fas fa-smile"></i> Entrenamiento facial</h6>
             </div>
             <div class="row">
-                <div class="col-5 form-check form-switch m-3">
+                <div class="col-4 form-check form-switch m-3">
                     <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="switchEntrenamiento"
                         name="switchVideo" />
                     <label class="form-check-label cursor-pointer" for="switchEntrenamiento">Iniciar Entrenamiento</label>
                 </div>
-                <div class="col-5 m-3" id="estado-entrenamiento">Fotos capturadas: </div>
+                <div class="col-5 m-3">
+                    <div id="seccion-entrenamiento" class="row d-none">
+                        <h4 id="camara-entrenamiento"><i class="fas fa-camera"></i></h4>
+                        <div class="mx-3 mt-1" id="estado-entrenamiento"></div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="mt-3">
             <div class="border-bottom">
-                <h6>Monitoreo de expresiones faciales</h6>
+                <h6><i class="fas fa-video"></i> Monitoreo de expresiones faciales</h6>
             </div>
             <div class="row mt-4">
-                <div class="col-3">
+                <div class="col-4">
                     <select id="tiempo-monitoreo" class="form-control custom-select text-center cursor-pointer">
                         <option value="15" selected>15 segundos</option>
                         <option value="30">30 segundos</option>
@@ -37,20 +42,29 @@
                         <option value="59">59 segundos</option>
                     </select>
                 </div>
-                <div class="col-4 form-check form-switch">
+                <div class="col-3 form-check form-switch">
                     <input class="form-check-input m-6 cursor-pointer" type="checkbox" role="switch" id="switchMonitoreo"
                         name="switchMonitoreo" />
                     <label class="form-check-label cursor-pointer" for="switchMonitoreo">Iniciar Monitoreo</label>
                 </div>
-                <div class="reloj col-5" id="tiempo">Reloj: 00:00:00</div>
+                <div id="seccion-monitoreo" class="row d-none">
+                    <h4 id="reloj-monitoreo"><i class="fas fa-clock"></i></h4>
+                    <div class="reloj mx-3 mt-1" id="tiempo">00:00:00</div>
+                </div>
             </div>
-            <div class="row mt-2">
-                <div class="m-3" id="estado-monitoreo">Estado del monitoreo: </div>
+        </div>
+        <div class="mt-4">
+            <div class="border-bottom">
+                <h6><i class="fas fa-user"></i> Resultado del monitoreo</h6>
+            </div>
+            <div class="row m-3" id="estado-monitoreo"></div>
+            <div id="icono-exprexion" style="font-size: 130px; text-align: center; border: 1px; color: #2a6275;">
+                <i class="fas fa-smile-beam"></i> <i class="fas fa-search"></i>
             </div>
         </div>
     </div>
     <div class="card col-sm-6 border-sombra left-3 mx-4 p-4">
-        <h6>Video de la cámara web</h6>
+        <h6><i class="fas fa-camera"></i> Video de la cámara web</h6>
         <div style="white-space: nowrap; overflow-x: auto;" class="video-wrap border border-dark">
             <video id="video" width="640" height="480" playsinline autoplay></video>
         </div>

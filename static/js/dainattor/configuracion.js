@@ -15,8 +15,10 @@ function iniciarVideo(accion) {
         window.localStream = stream;
         video.srcObject = stream;
         if (accion == 'entrenamiento'){
+            $("#seccion-entrenamiento").removeClass("d-none");
             iniciarEntrenamiento()
         }else{
+            $("#seccion-monitoreo").removeClass("d-none");
             inicioCronometro()
         }
         })
@@ -46,10 +48,13 @@ switchEntrenamiento.addEventListener('change', function(){
 
 switchMonitoreo.addEventListener('change', function(){
     if(switchMonitoreo.checked){
+        $("#reloj-monitoreo").css("color", "#0e0c66")
+        $("#tiempo").css("color", "#0e0c66")
         iniciarVideo('monitoreo')
     }else{
         detenerVideo()
         reiniciarCronometro()
+        $("#seccion-monitoreo").addClass("d-none");
     }
 });
 
@@ -66,12 +71,14 @@ function iniciarEntrenamiento(){
         switch (data.result) {
             case '1':
                 if(data.tiene_rostro == '1'){
-                    $("#estado-entrenamiento").text('Fotos capturadas: ' + (cont_imagenes + 1) + ' de ' + caputarar_imagenes +' fotos')
-                    $("#estado-entrenamiento").css("color", "#000000")
+                    $("#estado-entrenamiento").text((cont_imagenes + 1) + ' de ' + caputarar_imagenes +' fotos')
+                    $("#estado-entrenamiento").css("color", "#0e0c66")
+                    $("#camara-entrenamiento").css("color", "#0e0c66")
                     cont_imagenes += 1
                 }else{
-                    $("#estado-entrenamiento").text('Fotos capturadas: No existe un rostro en la imagen')
+                    $("#estado-entrenamiento").text('No se detecta ningún rostro')
                     $("#estado-entrenamiento").css("color", "#ff0000")
+                    $("#camara-entrenamiento").css("color", "#ff0000")
                 }
             break;
             case '0':
@@ -89,6 +96,7 @@ function iniciarEntrenamiento(){
             cont_imagenes = 0
             detenerVideo()
             switchEntrenamiento.disabled = false
+            $("#seccion-entrenamiento").addClass("d-none");
             Swal.fire({
                 icon: 'success',
                 title: '¡Excelente!',
@@ -122,14 +130,14 @@ function reiniciarCronometro () {
 	centesimas = 0
 	segundos = 0
 	minutos = 0
-	tiempo.innerHTML = "Reloj: "+ minutos +":"+ segundos +":"+ centesimas +""
+	tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
 }
 
 function cronometro () {
 	if (centesimas < 99) {
 		centesimas++;
 		if (centesimas < 10) { centesimas = "0"+centesimas }
-        tiempo.innerHTML = "Reloj: "+ minutos +":"+ segundos +":"+ centesimas +""
+        tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
 	}
 	if (centesimas == 99) {
 		centesimas = -1;
@@ -137,7 +145,7 @@ function cronometro () {
 	if (centesimas == 0) {
 		segundos ++
 		if (segundos < 10) { segundos = "0"+segundos }
-		tiempo.innerHTML = "Reloj: "+ minutos +":"+ segundos +":"+ centesimas +""
+		tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
 	}
     if(segundos == $("#tiempo-monitoreo option:selected").val()){
         reiniciarCronometro()
@@ -149,7 +157,7 @@ function cronometro () {
 	if ( (centesimas == 0)&&(segundos == 0) ) {
 		minutos++
 		if (minutos < 10) { minutos = "0"+minutos }
-		tiempo.innerHTML = "Reloj: "+ minutos +":"+ segundos +":"+ centesimas +""
+		tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
 	}
 	if (minutos == 59) {
 		minutos = -1
@@ -158,6 +166,10 @@ function cronometro () {
 }
 
 function monitorearExpre(){
+
+
+  
+        
     var csrftoken = getCookie('csrftoken')
     context.drawImage(video, 0, 0, 640, 480)
     const data = canvas.toDataURL()
@@ -172,11 +184,33 @@ function monitorearExpre(){
         switch (data.result) {
             case '1':
                 if(data.tiene_rostro == '1'){
-                    $("#estado-monitoreo").text('Estado del monitoreo: Rostro detectado con expresión facial de ' + data.expresion_facial)
-                    $("#estado-monitoreo").css("color", "#000000")
-                    cont_imagenes += 1
+                    $("#estado-monitoreo").text('Última expresión facial reconocida: ' + data.expresion_facial)
+                    $("#estado-monitoreo").css("color", "#0e0c66")
+                    switch(data.expresion_facial){
+                        case 'Enfadado':
+                            $("#icono-exprexion").html('<i class="fas fa-angry"></i>');
+                        break;
+                        case 'Disgustado':
+                            $("#icono-exprexion").html('<i class="fas fa-frown"></i>');
+                        break;
+                        case 'Temeroso':
+                            $("#icono-exprexion").html('<i class="fas fa-grimace"></i>');
+                        break;
+                        case 'Feliz':
+                            $("#icono-exprexion").html('<i class="fas fa-laugh-beam"></i>');
+                        break;
+                        case 'Neutral':
+                            $("#icono-exprexion").html('<i class="fas fa-smile"></i>');
+                        break;
+                        case 'Triste':
+                            $("#icono-exprexion").html('<i class="fas fa-sad-cry"></i>');
+                        break;
+                        case 'Sorprendido':
+                            $("#icono-exprexion").html('<i class="fas fa-surprise"></i>');
+                        break;
+                    }
                 }else{
-                    $("#estado-monitoreo").text('Estado del monitoreo: No existe un rostro en la imagen')
+                    $("#estado-monitoreo").text('En la última toma no se reconoció un rostro')
                     $("#estado-monitoreo").css("color", "#ff0000")
                 }
             break;

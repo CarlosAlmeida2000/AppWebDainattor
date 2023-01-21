@@ -95,7 +95,7 @@
 .titulo {
     display: flex;
     align-items: center;
-    margin: 1rem 0rem 0.4rem 0rem;
+    margin: 0.1rem 0rem 0.4rem 0rem;
 }
 
 .img-portada {

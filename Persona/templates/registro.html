@@ -8,10 +8,76 @@
 
 {% block content %}
 <main>
-    <div class="log-container" style="margin-bottom: 3.1em; margin-top: 7em;">
+    <div class="log-container" >
         <div class="log-img">
-            <h3>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de un historial de expresiones faciales del rostro.</h3>
+            <h3>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de un historial de expresiones faciales del rostro.</h3> <h7>Versión 1.0</h7>
             <img src="{% static 'img/doctor.jpg' %}" alt="Foto de portada" class="img-portada mt-5">
+            <div class="footer-grid text-center">
+                <div class="desarrolladores">
+                    <h6>Equipo de trabajo</h6>
+                    <ul class="item-conteiner">
+                        <li class="item">
+                            <a href="">
+                                <a href="https://www.facebook.com/carlosdue2000/" target="_blank">
+                                    Carlos Almeida
+                                </a>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="#" target="_blank">
+                                Lucrecia Llerena
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="#" target="_blank">
+                                Nancy Rodríguez
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="#" target="_blank">
+                                John Castro
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="redes-sociales">
+                    <h6>Nuestros contactos</h6>
+                    <ul class="item-conteiner">
+                        <li class="item">
+                            <a href="mailto:carlos.almeida2017@uteq.edu.ec" target="_blank">
+                                <div style="white-space: nowrap;">
+                                    <i class="far fa-envelope mail"></i>
+                                    carlos.almeida2017@uteq.edu.ec
+                                </div>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="mailto:lllerena@uteq.edu.ec" target="_blank">
+                                <div style="white-space: nowrap;">
+                                    <i class="far fa-envelope mail"></i>
+                                    lllerena@uteq.edu.ec
+                                </div>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="mailto:nrodriguez@uteq.edu.ec" target="_blank">
+                                <div style="white-space: nowrap;">
+                                    <i class="far fa-envelope mail"></i>
+                                    nrodriguez@uteq.edu.ec
+                                </div>
+                            </a>
+                        </li>
+                        <li class="item">
+                            <a href="mailto:sirwyl@gmail.com" target="_blank">
+                                <div style="white-space: nowrap;">
+                                    <i class="far fa-envelope mail"></i>
+                                    sirwyl@gmail.com
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
         <div class="log mx-5">
             <h3>Crear cuenta de usuario</h3>
@@ -47,7 +113,7 @@
                         <label for="txtClave" class="log-f-label">Contraseña</label>
                         <div class="row">
                             <input type="password" class="log-f-input col mx-3" id="txtClave" name="txtClave"
-                            placeholder="***********" />
+                            placeholder="***********" required/>
                             <button id="verClave" name="verClave" class="btn btn-primary col-sm-2 mx-3 verClave" onclick="javascript:mostrarValor(txtClave);" type="button"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
@@ -55,7 +121,7 @@
                         <label for="txtClave2" class="log-f-label">Repita la contraseña</label>
                         <div class="row">
                             <input type="password" class="log-f-input col mx-3" id="txtClave2" name="txtClave2"
-                            placeholder="***********" />
+                            placeholder="***********" required/>
                             <button id="verClave" name="verClave" class="btn btn-primary col-sm-2 mx-3 verClave" onclick="javascript:mostrarValor(txtClave2);" type="button"><i class="fas fa-eye"></i></button>
                         </div>
                     </div>
@@ -76,10 +142,6 @@
     </div>
 </main>
 {% endblock content %}
-
-{% block content2 %} 
-<!-- {% include 'components/footer.html' %} -->
-{% endblock content2 %}
 
 {% block js %}
 <script src="{% static '/js/dainattor/persona.js'%}"></script>

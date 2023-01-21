@@ -9,7 +9,7 @@
     background-color: #2a6275;
     margin-top: 0.75rem;
     padding: 1rem;
-    color: white;
+    color: black;
 }
 
 .footer-grid {
@@ -17,7 +17,8 @@
     gap: 2em;
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    margin: auto;
+    margin-top: 25px;
+    margin-left: 190px;
 }
 
 .mail {
@@ -34,13 +35,13 @@
 }
 
 .item > a {
-    color: white;
+    color: black;
     text-decoration: none;
 }
 
 .item > a:hover {
-    color: greenyellow;
-    text-decoration: greenyellow underline;
+    color: #2a6275;
+    text-decoration: #2a6275;
 }
 
 @media (max-width: 700px) {

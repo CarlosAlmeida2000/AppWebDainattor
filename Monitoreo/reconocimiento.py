@@ -112,7 +112,7 @@ class ExpresionFacial:
                         self.expresiones_recono = {}
                         cropped_img = np.expand_dims(np.expand_dims(cv2.resize(rostro, (48, 48)), -1), 0)
 
-                        for e in range(6):
+                        for e in range(3):
                             # se reconoce la expresión facial
                             prediction = self.reconocedor_expresiones.predict(cropped_img)
                             expresion = self.emotion_dict[int(np.argmax(prediction))]

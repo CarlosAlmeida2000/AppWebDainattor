@@ -4,7 +4,6 @@ from django.db import models
 # Create your models here.
 class Personas(models.Model):
     nombres_apellidos = models.CharField(max_length = 70)
-    cedula = models.CharField(max_length = 10, unique = True)
     fecha_nacimiento = models.DateField()
     foto_perfil = models.ImageField(upload_to = 'Perfiles', null = True, blank = True)
 

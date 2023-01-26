@@ -76,26 +76,20 @@ def vwGuardarUsuario(request):
     try:
         with transaction.atomic():
             if request.method == 'POST':
-                existe_persona = Personas.objects.filter(cedula = request.POST['txtCedula'])
-                if len(existe_persona) == 0:
-                    unUsuario = Usuarios()
-                    unUsuario.nom_usuario = request.POST['txtUsuario']
-                    # En caso de no haber ingresado ninguna contraseña, se mantiene la actual.
-                    if request.POST['txtClave']:
-                        unUsuario.clave = cifrar(request.POST['txtClave'])
-                    unaPersona = Personas()
-                    unaPersona.nombres_apellidos = request.POST['txtNombres']
-                    unaPersona.cedula = request.POST['txtCedula']
-                    unaPersona.fecha_nacimiento = request.POST['dtmFechaNaci']
-                    unaPersona.save()
-                    unUsuario.persona = unaPersona
-                    unUsuario.save()
-                    # Actualizar la variable sesion de nombres de usuario.
-                    request.session['nombres'] = unaPersona.nombres_apellidos
-                    return JsonResponse({'result': '1'})
-                else:
-                    # Ingreso la cédula de otra persona ya registrada
-                    return JsonResponse({'result': '3'})        
+                unUsuario = Usuarios()
+                unUsuario.nom_usuario = request.POST['txtUsuario']
+                # En caso de no haber ingresado ninguna contraseña, se mantiene la actual.
+                if request.POST['txtClave']:
+                    unUsuario.clave = cifrar(request.POST['txtClave'])
+                unaPersona = Personas()
+                unaPersona.nombres_apellidos = request.POST['txtNombres']
+                unaPersona.fecha_nacimiento = request.POST['dtmFechaNaci']
+                unaPersona.save()
+                unUsuario.persona = unaPersona
+                unUsuario.save()
+                # Actualizar la variable sesion de nombres de usuario.
+                request.session['nombres'] = unaPersona.nombres_apellidos
+                return JsonResponse({'result': '1'})
     except IntegrityError:
         # Usuario repetido
         return JsonResponse({'result': '4'})   
@@ -108,24 +102,19 @@ def vwModificarUsuario(request):
         with transaction.atomic():
             if request.method == 'POST':
                 unUsuario = Usuarios.objects.get(id = request.session['usuarioId'])
-                existe_persona = Personas.objects.filter(cedula = request.POST['txtCedula'])
-                if len(existe_persona) == 0 or (len(existe_persona) == 1 and existe_persona[0].id == unUsuario.persona.id):
-                    unUsuario.nom_usuario = request.POST['txtUsuario']
-                    # En caso de no haber ingresado ninguna contraseña, se mantiene la actual.
-                    if request.POST['txtClave']:
-                        unUsuario.clave = cifrar(request.POST['txtClave'])
-                    unaPersona = Personas.objects.get(pk = unUsuario.persona.id)
-                    unaPersona.nombres_apellidos = request.POST['txtNombres']
-                    unaPersona.cedula = request.POST['txtCedula']
-                    unaPersona.fecha_nacimiento = request.POST['dtmFechaNaci']
-                    unaPersona.save()
-                    unUsuario.save()
-                    # Actualizar la variable sesion de nombres de usuario.
-                    request.session['nombres'] = unaPersona.nombres_apellidos
-                    return JsonResponse({'result': '1'})
-                else:
-                    # Ingreso la cédula de otra persona ya registrada
-                    return JsonResponse({'result': '3'})    
+                unUsuario.nom_usuario = request.POST['txtUsuario']
+                # En caso de no haber ingresado ninguna contraseña, se mantiene la actual.
+                if request.POST['txtClave']:
+                    unUsuario.clave = cifrar(request.POST['txtClave'])
+                unaPersona = Personas.objects.get(pk = unUsuario.persona.id)
+                unaPersona.nombres_apellidos = request.POST['txtNombres']
+                unaPersona.cedula = request.POST['txtCedula']
+                unaPersona.fecha_nacimiento = request.POST['dtmFechaNaci']
+                unaPersona.save()
+                unUsuario.save()
+                # Actualizar la variable sesion de nombres de usuario.
+                request.session['nombres'] = unaPersona.nombres_apellidos
+                return JsonResponse({'result': '1'})
     except IntegrityError:
         # Usuario repetido
         return JsonResponse({'result': '4'})    

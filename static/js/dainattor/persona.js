@@ -38,13 +38,6 @@ $(document).ready(function () {
                     window.location.href = '/';
                   });
                 break;
-                case '3':
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'La cédula ya se encuentra registra por otro usuario'
-                    });
-                break;
                 case '4':
                     Swal.fire({
                         icon: 'error',

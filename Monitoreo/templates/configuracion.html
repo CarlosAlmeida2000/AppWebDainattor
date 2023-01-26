@@ -17,10 +17,10 @@
             </div>
             <div class="row">
                 <div class="col-4 form-check form-switch m-3">
-                    <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="switchEntrenamiento"
-                        name="switchVideo" />
-                    <label class="form-check-label cursor-pointer" for="switchEntrenamiento">Iniciar Entrenamiento</label>
+                    <button class="btn btn-primary btn-sm mt-1" type="button" id="switchEntrenamiento" title="Entrenar"><i
+                        class="fas fa-search"></i> Entrenar</button>
                 </div>
+                
                 <div class="col-5 m-3">
                     <div id="seccion-entrenamiento" class="row d-none">
                         <h4 id="camara-entrenamiento"><i class="fas fa-camera"></i></h4>
@@ -42,10 +42,9 @@
                         <option value="59">59 segundos</option>
                     </select>
                 </div>
-                <div class="col-3 form-check form-switch">
-                    <input class="form-check-input m-6 cursor-pointer" type="checkbox" role="switch" id="switchMonitoreo"
-                        name="switchMonitoreo" />
-                    <label class="form-check-label cursor-pointer" for="switchMonitoreo">Iniciar Monitoreo</label>
+                <div class="col-4 form-check form-switch">
+                    <button class="btn btn-primary btn-sm mt-1" type="button" id="switchMonitoreo" title="Monitorear"><i
+                        class="fas fa-search"></i> Monitorear</button>
                 </div>
                 <div id="seccion-monitoreo" class="row d-none">
                     <h4 id="reloj-monitoreo"><i class="fas fa-clock"></i></h4>

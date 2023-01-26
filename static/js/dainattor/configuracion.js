@@ -5,112 +5,123 @@ var canvas = document.getElementById('canvas')
 var context = canvas.getContext('2d')
 var cont_imagenes = 0
 var caputarar_imagenes = 100
+var entrenando = false
+var monitoreando = false
 
 // iniciar cámara web
 function iniciarVideo(accion) {
     navigator.mediaDevices.getUserMedia({
         video: true
-        })
+    })
         .then(stream => {
-        window.localStream = stream;
-        video.srcObject = stream;
-        if (accion == 'entrenamiento'){
-            $("#seccion-entrenamiento").removeClass("d-none");
-            iniciarEntrenamiento()
-        }else{
-            $("#seccion-monitoreo").removeClass("d-none");
-            inicioCronometro()
-        }
+            window.localStream = stream;
+            video.srcObject = stream;
+            if (accion == 'entrenamiento') {
+                $("#seccion-entrenamiento").removeClass("d-none");
+                iniciarEntrenamiento()
+            } else {
+                $("#seccion-monitoreo").removeClass("d-none");
+                inicioCronometro()
+            }
         })
         .catch((err) => {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Sucedió un error en obtener iniciar el video, intentalo de nuevo'
-        });
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Sucedió un error en obtener iniciar el video, intentalo de nuevo'
+            });
         });
 }
 
 // detener cámara web
-function detenerVideo(){
+function detenerVideo() {
     localStream.getVideoTracks()[0].stop()
     video.srcObject = null
 }
 
-switchEntrenamiento.addEventListener('change', function(){
-    if(switchEntrenamiento.checked){
-        switchEntrenamiento.disabled = true
+switchEntrenamiento.addEventListener('click', function () {
+    if (!entrenando) {
+        entrenando = true
         iniciarVideo('entrenamiento')
-    }else{
+    } else {
+        entrenando = false
+        cont_imagenes = 0
+        detenerVideo()
+        $("#seccion-entrenamiento").addClass("d-none");
         detenerVideo()
     }
 });
 
-switchMonitoreo.addEventListener('change', function(){
-    if(switchMonitoreo.checked){
+switchMonitoreo.addEventListener('click', function () {
+    if (!monitoreando) {
+        monitoreando = true
         $("#reloj-monitoreo").css("color", "#0e0c66")
         $("#tiempo").css("color", "#0e0c66")
         iniciarVideo('monitoreo')
-    }else{
+    } else {
+        monitoreando = false
         detenerVideo()
         reiniciarCronometro()
         $("#seccion-monitoreo").addClass("d-none");
     }
 });
 
-function iniciarEntrenamiento(){
+function iniciarEntrenamiento() {
     var csrftoken = getCookie('csrftoken')
     context.drawImage(video, 0, 0, 640, 480)
     const data = canvas.toDataURL()
     $.ajax({
         url: '/capturar-rostro-entrenamiento/',
         type: 'POST',
-        data: {csrfmiddlewaretoken: csrftoken, 'imagen': data, 'cont_imagenes': cont_imagenes},
+        data: { csrfmiddlewaretoken: csrftoken, 'imagen': data, 'cont_imagenes': cont_imagenes },
         dataType: "json"
     }).done(function (data) {
         switch (data.result) {
             case '1':
-                if(data.tiene_rostro == '1'){
-                    $("#estado-entrenamiento").text((cont_imagenes + 1) + ' de ' + caputarar_imagenes +' fotos')
+                if (data.tiene_rostro == '1') {
+                    $("#estado-entrenamiento").text((cont_imagenes + 1) + ' de ' + caputarar_imagenes + ' fotos')
                     $("#estado-entrenamiento").css("color", "#0e0c66")
                     $("#camara-entrenamiento").css("color", "#0e0c66")
                     cont_imagenes += 1
-                }else{
+                } else {
                     $("#estado-entrenamiento").text('No se detecta ningún rostro')
                     $("#estado-entrenamiento").css("color", "#ff0000")
                     $("#camara-entrenamiento").css("color", "#ff0000")
                 }
-            break;
+                break;
             case '0':
+                cont_imagenes = 0
+                detenerVideo()
+                $("#seccion-entrenamiento").addClass("d-none");
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Sucedió un error durante el entrenamiento facial, intentalo de nuevo'
                 });
-            break;
+                break;
         }
-        if(cont_imagenes < caputarar_imagenes){
+        if (cont_imagenes < caputarar_imagenes) {
             iniciarEntrenamiento()
-        }else{
-            switchEntrenamiento.checked = false
+        } else {
             cont_imagenes = 0
             detenerVideo()
-            switchEntrenamiento.disabled = false
             $("#seccion-entrenamiento").addClass("d-none");
             Swal.fire({
                 icon: 'success',
                 title: '¡Excelente!',
                 text: 'Entrenamiento facial culminado exitosamente.'
-                });
+            });
             return 0
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
+        cont_imagenes = 0
+        detenerVideo()
+        $("#seccion-entrenamiento").addClass("d-none");
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Sucedió un error durante el entrenamiento facial, intentalo de nuevo'
         });
-        switchEntrenamiento.disabled = false
     }).always(function (data) {
     });
 }
@@ -121,106 +132,102 @@ var centesimas = 0
 var segundos = 0
 var minutos = 0
 
-function inicioCronometro () {
-	control = setInterval(cronometro, 10);
+function inicioCronometro() {
+    control = setInterval(cronometro, 10);
 }
 
-function reiniciarCronometro () {
-	clearInterval(control)
-	centesimas = 0
-	segundos = 0
-	minutos = 0
-	tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
+function reiniciarCronometro() {
+    clearInterval(control)
+    centesimas = 0
+    segundos = 0
+    minutos = 0
+    tiempo.innerHTML = minutos + ":" + segundos + ":" + centesimas + ""
 }
 
-function cronometro () {
-	if (centesimas < 99) {
-		centesimas++;
-		if (centesimas < 10) { centesimas = "0"+centesimas }
-        tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
-	}
-	if (centesimas == 99) {
-		centesimas = -1;
-	}
-	if (centesimas == 0) {
-		segundos ++
-		if (segundos < 10) { segundos = "0"+segundos }
-		tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
-	}
-    if(segundos == $("#tiempo-monitoreo option:selected").val()){
+function cronometro() {
+    if (centesimas < 99) {
+        centesimas++;
+        if (centesimas < 10) { centesimas = "0" + centesimas }
+        tiempo.innerHTML = minutos + ":" + segundos + ":" + centesimas + ""
+    }
+    if (centesimas == 99) {
+        centesimas = -1;
+    }
+    if (centesimas == 0) {
+        segundos++
+        if (segundos < 10) { segundos = "0" + segundos }
+        tiempo.innerHTML = minutos + ":" + segundos + ":" + centesimas + ""
+    }
+    if (segundos == $("#tiempo-monitoreo option:selected").val()) {
         reiniciarCronometro()
         monitorearExpre()
     }
-	if (segundos == 59) {
-		segundos = -1
-	}
-	if ( (centesimas == 0)&&(segundos == 0) ) {
-		minutos++
-		if (minutos < 10) { minutos = "0"+minutos }
-		tiempo.innerHTML = minutos +":"+ segundos +":"+ centesimas +""
-	}
-	if (minutos == 59) {
-		minutos = -1
-	}
-    
+    if (segundos == 59) {
+        segundos = -1
+    }
+    if ((centesimas == 0) && (segundos == 0)) {
+        minutos++
+        if (minutos < 10) { minutos = "0" + minutos }
+        tiempo.innerHTML = minutos + ":" + segundos + ":" + centesimas + ""
+    }
+    if (minutos == 59) {
+        minutos = -1
+    }
+
 }
 
-function monitorearExpre(){
-
-
-  
-        
+function monitorearExpre() {
     var csrftoken = getCookie('csrftoken')
     context.drawImage(video, 0, 0, 640, 480)
     const data = canvas.toDataURL()
     $.ajax({
         url: '/monitorear-expesiones/',
         type: 'POST',
-        data: {csrfmiddlewaretoken: csrftoken, 'imagen': data},
+        data: { csrfmiddlewaretoken: csrftoken, 'imagen': data },
         dataType: "json"
     }).done(function (data) {
         reiniciarCronometro()
         inicioCronometro()
         switch (data.result) {
             case '1':
-                if(data.tiene_rostro == '1'){
+                if (data.tiene_rostro == '1') {
                     $("#estado-monitoreo").text('Última expresión facial reconocida: ' + data.expresion_facial)
                     $("#estado-monitoreo").css("color", "#0e0c66")
-                    switch(data.expresion_facial){
+                    switch (data.expresion_facial) {
                         case 'Enfadado':
                             $("#icono-exprexion").html('<i class="fas fa-angry"></i>');
-                        break;
+                            break;
                         case 'Disgustado':
                             $("#icono-exprexion").html('<i class="fas fa-frown"></i>');
-                        break;
+                            break;
                         case 'Temeroso':
                             $("#icono-exprexion").html('<i class="fas fa-grimace"></i>');
-                        break;
+                            break;
                         case 'Feliz':
                             $("#icono-exprexion").html('<i class="fas fa-laugh-beam"></i>');
-                        break;
+                            break;
                         case 'Neutral':
                             $("#icono-exprexion").html('<i class="fas fa-smile"></i>');
-                        break;
+                            break;
                         case 'Triste':
                             $("#icono-exprexion").html('<i class="fas fa-sad-cry"></i>');
-                        break;
+                            break;
                         case 'Sorprendido':
                             $("#icono-exprexion").html('<i class="fas fa-surprise"></i>');
-                        break;
+                            break;
                     }
-                }else{
+                } else {
                     $("#estado-monitoreo").text('En la última toma no se reconoció un rostro')
                     $("#estado-monitoreo").css("color", "#ff0000")
                 }
-            break;
+                break;
             case '0':
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Sucedió un error durante el monitoreo facial, intentalo de nuevo'
                 });
-            break;
+                break;
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         reiniciarCronometro()
@@ -230,7 +237,6 @@ function monitorearExpre(){
             title: 'Oops...',
             text: 'Sucedió un error durante el monitoreo facial, intentalo de nuevo'
         });
-        switchEntrenamiento.disabled = false
     }).always(function (data) {
     });
 }

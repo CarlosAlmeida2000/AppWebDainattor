@@ -1,3 +1,13 @@
+:root {
+  --color_blanco: #f9f9f9;
+  --color_azul: #0c0a78;
+  --color_header: #2a6275;
+}
+
+.azul{
+  color: var(--color_azul);
+}
+
 .container-hu {
   display: grid;
   align-items: center;

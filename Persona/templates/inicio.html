@@ -9,7 +9,7 @@
 <main>
     <div class="row">
         <div class="col-sm-7 p-2">
-            <div class="row text-center">
+            <div class="row text-center azul">
                 <div class="mx-auto">
                     <h3 class="p-4">Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el
                         análisis de un historial de expresiones faciales del rostro.</h3>
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="footer-grid text-center">
                     <div class="col">
-                        <h6>Equipo de trabajo</h6>
+                        <h6 class="azul">Equipo de trabajo</h6>
                         <ul class="item-conteiner">
                             <li class="item">
                                 <a href="">
@@ -51,7 +51,7 @@
                         </ul>
                     </div>
                     <div class="col">
-                        <h6>Nuestros contactos</h6>
+                        <h6 class="azul">Nuestros contactos</h6>
                         <ul class="item-conteiner">
                             <li class="item">
                                 <a href="mailto:carlos.almeida2017@uteq.edu.ec" target="_blank">
@@ -96,13 +96,13 @@
 
         <div class="col-sm-5 p-4 mt-5">
             <div class="log">
-                <h4 class="text-center">Bienvenido(a) a Dainattor</h4>
+                <h4 class="text-center azul">Bienvenido(a) a Dainattor</h4>
                 <form method="POST" id="formLogin" class="log-form">
                     {% csrf_token %}
-                    <label for="txtUsuario" class="log-f-label">Usuario</label>
+                    <label for="txtUsuario" class="log-f-label azul">Usuario</label>
                     <input type="text" id="txtUsuario" name="txtUsuario" autocomplete="off" class="log-f-input" required>
                     <div class="mb-3">
-                        <label for="txtClave" class="log-f-label">Contraseña</label>
+                        <label for="txtClave" class="log-f-label azul">Contraseña</label>
                         <div class="input-group row">
                             <div class="col-sm-10">
                                 <input type="password" class="log-f-input" id="txtClave" name="txtClave"
@@ -110,7 +110,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <button type="button" id="verClave" name="verClave"
-                                    class="btn btn-icon btn-primary w-100 btn-sm" data-bs-toggle="modal"
+                                    class="btn btn-icon btn-primary btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#modal-select-provider" onclick="javascript:mostrarValor(txtClave);">
                                     <i class="fas fa-eye"></i>
                                 </button>

@@ -8,128 +8,162 @@
 
 {% block content %}
 <main>
-    <div class="log-container" >
-        <div class="log-img">
-            <h3>Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el análisis de un historial de expresiones faciales del rostro.</h3> <h7>Versión 1.0</h7>
-            <img src="{% static 'img/doctor.jpg' %}" alt="Foto de portada" class="img-portada mt-5">
-            <div class="footer-grid text-center">
-                <div class="desarrolladores">
-                    <h6>Equipo de trabajo</h6>
-                    <ul class="item-conteiner">
-                        <li class="item">
-                            <a href="">
-                                <a href="https://www.facebook.com/carlosdue2000/" target="_blank">
-                                    Carlos Almeida
-                                </a>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="#" target="_blank">
-                                Lucrecia Llerena
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="#" target="_blank">
-                                Nancy Rodríguez
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="#" target="_blank">
-                                John Castro
-                            </a>
-                        </li>
-                    </ul>
+    <div class="row">
+        <div class="col-sm-7 p-2">
+            <div class="row text-center">
+                <div class="mx-auto">
+                    <h3 class="p-4">Dainattor es un software que brinda predicciones de un posible trastorno emocional mediante el
+                        análisis de un historial de expresiones faciales del rostro.</h3>
+                    <h7>Versión 1.0</h7>
                 </div>
-                <div class="redes-sociales">
-                    <h6>Nuestros contactos</h6>
-                    <ul class="item-conteiner">
-                        <li class="item">
-                            <a href="mailto:carlos.almeida2017@uteq.edu.ec" target="_blank">
-                                <div style="white-space: nowrap;">
-                                    <i class="far fa-envelope mail"></i>
-                                    carlos.almeida2017@uteq.edu.ec
-                                </div>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="mailto:lllerena@uteq.edu.ec" target="_blank">
-                                <div style="white-space: nowrap;">
-                                    <i class="far fa-envelope mail"></i>
-                                    lllerena@uteq.edu.ec
-                                </div>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="mailto:nrodriguez@uteq.edu.ec" target="_blank">
-                                <div style="white-space: nowrap;">
-                                    <i class="far fa-envelope mail"></i>
-                                    nrodriguez@uteq.edu.ec
-                                </div>
-                            </a>
-                        </li>
-                        <li class="item">
-                            <a href="mailto:sirwyl@gmail.com" target="_blank">
-                                <div style="white-space: nowrap;">
-                                    <i class="far fa-envelope mail"></i>
-                                    sirwyl@gmail.com
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+            </div>
+
+            <div class="row">
+                <img src="{% static 'img/doctor.jpg' %}" alt="Foto de portada" class="img-portada mt-2 mx-auto">
+            </div>
+
+            <div class="row">
+                <div class="footer-grid text-center">
+                    <div class="col">
+                        <h6>Equipo de trabajo</h6>
+                        <ul class="item-conteiner">
+                            <li class="item">
+                                <a href="">
+                                    <a href="https://www.facebook.com/carlosdue2000/" target="_blank">
+                                        Carlos Almeida
+                                    </a>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="#" target="_blank">
+                                    Lucrecia Llerena
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="#" target="_blank">
+                                    Nancy Rodríguez
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="#" target="_blank">
+                                    John Castro
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h6>Nuestros contactos</h6>
+                        <ul class="item-conteiner">
+                            <li class="item">
+                                <a href="mailto:carlos.almeida2017@uteq.edu.ec" target="_blank">
+                                    <div style="white-space: nowrap;">
+                                        <i class="far fa-envelope mail"></i>
+                                        carlos.almeida2017@uteq.edu.ec
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="mailto:lllerena@uteq.edu.ec" target="_blank">
+                                    <div style="white-space: nowrap;">
+                                        <i class="far fa-envelope mail"></i>
+                                        lllerena@uteq.edu.ec
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="mailto:nrodriguez@uteq.edu.ec" target="_blank">
+                                    <div style="white-space: nowrap;">
+                                        <i class="far fa-envelope mail"></i>
+                                        nrodriguez@uteq.edu.ec
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="mailto:sirwyl@gmail.com" target="_blank">
+                                    <div style="white-space: nowrap;">
+                                        <i class="far fa-envelope mail"></i>
+                                        sirwyl@gmail.com
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="log mx-5">
-            <h3>Crear cuenta de usuario</h3>
-            <form method="POST" class="log-form row" id="formRegistroUsuario" name="formRegistroUsuario">
-                {% csrf_token %}
-                <div class="col-sm">
-                    <div class="mb-3">
-                        <label for="txtNombres" class="log-f-label">Nombres y apellidos</label>
-                        <input type="text" form="formRegistroUsuario" class="log-f-input" id="txtNombres"
-                            name="txtNombres" placeholder="nombres" maxlength="70" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="dtmFechaNaci" class="log-f-label">Fecha de nacimiento</label>
-                        <input type="date" form="formRegistroUsuario" class="log-f-input cursor-pointer" id="dtmFechaNaci"
-                            name="dtmFechaNaci" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="txtUsuario" class="log-f-label">Usuario</label>
-                        <input type="text" form="formRegistroUsuario" class="log-f-input" id="txtUsuario"
-                            name="txtUsuario" placeholder="usuario" maxlength="20" required />
-                    </div>
-                </div>
-                <div class="col-sm mx-2">
-                    <div class="mb-3">
-                        <label for="txtClave" class="log-f-label">Contraseña</label>
-                        <div class="row">
-                            <input type="password" class="log-f-input col mx-3" id="txtClave" name="txtClave"
-                            placeholder="***********" required/>
-                            <button id="verClave" name="verClave" class="btn btn-primary col-sm-2 mx-3 verClave" onclick="javascript:mostrarValor(txtClave);" type="button"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="txtClave2" class="log-f-label">Repita la contraseña</label>
-                        <div class="row">
-                            <input type="password" class="log-f-input col mx-3" id="txtClave2" name="txtClave2"
-                            placeholder="***********" required/>
-                            <button id="verClave" name="verClave" class="btn btn-primary col-sm-2 mx-3 verClave" onclick="javascript:mostrarValor(txtClave2);" type="button"><i class="fas fa-eye"></i></button>
-                        </div>
-                    </div>
-                </div>
 
-                <button id="btnCrearCuenta" class="log-f-enviar btn btn-create-user" type="submit"
-                    form="formRegistroUsuario"><i class="fas fa-save"></i> Crear cuenta</button>
-                <div class="log-links">
-                    <div class="mt-1">
-                        Si ya tienes una cuenta
-                        <a href="/">
-                            inicia sesión aquí.
-                        </a>
+
+
+
+        <div class="col-sm-5 p-4 mt-5">
+            <div class="log">
+                <h3>Crear cuenta de usuario</h3>
+                <form method="POST" class="log-form row" id="formRegistroUsuario" name="formRegistroUsuario">
+                    {% csrf_token %}
+                    <div class="col-sm">
+                        <div class="mb-3">
+                            <label for="txtNombres" class="log-f-label">Nombres y apellidos</label>
+                            <input type="text" form="formRegistroUsuario" class="log-f-input" id="txtNombres"
+                                name="txtNombres" placeholder="nombres" maxlength="70" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="dtmFechaNaci" class="log-f-label">Fecha de nacimiento</label>
+                            <input type="date" min="1960-01-01" max="2018-12-31" form="formRegistroUsuario" class="log-f-input cursor-pointer"
+                                id="dtmFechaNaci" name="dtmFechaNaci" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtUsuario" class="log-f-label">Usuario</label>
+                            <input type="text" form="formRegistroUsuario" class="log-f-input" id="txtUsuario"
+                                name="txtUsuario" placeholder="usuario" maxlength="20" required />
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="col-sm">
+                        <div class="mb-3">
+                            <label for="txtClave" class="log-f-label">Contraseña</label>
+                            <div class="input-group row">
+                                <div class="col-sm-8">
+                                    <input type="password" form="formRegistroUsuario" class="log-f-input" id="txtClave"
+                                        name="txtClave" placeholder="***********" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" id="verClave" name="verClave" class="btn btn-icon btn-primary w-100 btn-sm"
+                                        data-bs-toggle="modal" data-bs-target="#modal-select-provider"
+                                        onclick="javascript:mostrarValor(txtClave);">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtClave2" class="log-f-label">Repita la contraseña</label>
+                            <div class="input-group row">
+                                <div class="col-sm-8">
+                                    <input type="password" form="formRegistroUsuario" class="log-f-input" id="txtClave2"
+                                        name="txtClave2" placeholder="***********" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" id="verClave" name="verClave" class="btn btn-icon btn-primary w-100 btn-sm"
+                                        data-bs-toggle="modal" data-bs-target="#modal-select-provider"
+                                        onclick="javascript:mostrarValor(txtClave2);">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <button id="btnCrearCuenta" class="log-f-enviar btn btn-create-user" type="submit"
+                        form="formRegistroUsuario"><i class="fas fa-save"></i> Crear cuenta</button>
+                    <div class="log-links">
+                        <div class="mt-1">
+                            Si ya tienes una cuenta
+                            <a href="/">
+                                inicia sesión aquí.
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </main>

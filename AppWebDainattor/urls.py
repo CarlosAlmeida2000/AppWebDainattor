@@ -36,6 +36,7 @@ urlpatterns = [
     # Sección de Monitoreo
     path('configuracion/', vwMonitoreo.vwConfiguracion, name='configuracion'),
     path('capturar-rostro-entrenamiento/', vwMonitoreo.vwCaptRostroEntrena, name='capturar-rostro-entrenamiento'),
+    path('tiene-entrenamiento/', vwMonitoreo.vwTieneEntrenamiento, name='tiene-entrenamiento'),
     path('monitorear-expesiones/', vwMonitoreo.vwMonitorearExpre, name='monitorear-expesiones'),
     path('historial/', vwMonitoreo.vwHistorial, name='historial'),
     path('buscar-historial/', vwMonitoreo.vwBuscarHistorial, name='buscar-historial'),

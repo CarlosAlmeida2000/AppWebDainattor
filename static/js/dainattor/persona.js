@@ -1,8 +1,7 @@
-function mostrarValor(tipo){
-//    var tipo = document.getElementById("txtClave");
-    if(tipo.type == "password"){
+function mostrarValor(tipo) {
+    if (tipo.type == "password") {
         tipo.type = "text";
-    }else{
+    } else {
         tipo.type = "password";
     }
 }
@@ -12,57 +11,59 @@ $(document).ready(function () {
     $("#formRegistroUsuario").submit(function (e) {
         e.preventDefault();
         var parametros = new FormData(this);
-        // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
-        document.querySelector("#btnCrearCuenta").setAttribute("disabled", false);
-        document.body.style.cursor = 'wait';
-        // petición ajax
-        $.ajax({
-            type: 'POST',
-            url: '/guardar-usuario/',
-            data: parametros,
-            dataType: 'json',
-            cache: false,
-            contentType: false,
-            processData: false
-        }).done(function (data) {
-            document.body.style.cursor = 'default';
-            document.querySelector("#btnCrearCuenta").removeAttribute("disabled")
-            switch (data.result) {
-                case '1':
-                  Swal.fire({
-                    icon: 'success',
-                    title: '¡Excelente!',
-                    text: 'Cuenta creada exitosamente, ya puedes iniciar sesión.',
-                    confirmButtonText: 'Ok'
-                  }).then((result) => {
-                    window.location.href = '/';
-                  });
-                break;
-                case '4':
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'El nombre de usuario ya se encuentra registro por otra persona'
-                    });
-                break;
-                case '0':
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Sucedió un error en registrar tus datos, intentalo de nuevo'
-                    });
-                break;
-            }
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            document.body.style.cursor = 'default';
-            document.querySelector("#btnCrearCuenta").removeAttribute("disabled")
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Sucedió un error en registrar tus datos, intentalo de nuevo acaa'
+        if (verificarContraseñas()) {
+            // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
+            document.querySelector("#btnCrearCuenta").setAttribute("disabled", false);
+            document.body.style.cursor = 'wait';
+            // petición ajax
+            $.ajax({
+                type: 'POST',
+                url: '/guardar-usuario/',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#btnCrearCuenta").removeAttribute("disabled")
+                switch (data.result) {
+                    case '1':
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Excelente!',
+                            text: 'Cuenta creada exitosamente, ya puedes iniciar sesión.',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            window.location.href = '/';
+                        });
+                        break;
+                    case '4':
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'El nombre de usuario ya se encuentra registro por otra persona'
+                        });
+                        break;
+                    case '0':
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Sucedió un error en registrar tus datos, intentalo de nuevo'
+                        });
+                        break;
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#btnCrearCuenta").removeAttribute("disabled")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Sucedió un error en registrar tus datos, intentalo de nuevo acaa'
+                });
+            }).always(function (data) {
             });
-        }).always(function (data) {
-        });
+        }
     });
 });
 
@@ -90,21 +91,21 @@ $(document).ready(function () {
             switch (data.result) {
                 case '1':
                     window.location.href = '/home';
-                break;
+                    break;
                 case '2':
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Credenciales incorrectas!, intentalo de nuevo'
                     });
-                break;
+                    break;
                 case '0':
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
                         text: 'Sucedió un error al iniciar sesión, intentalo de nuevo'
                     });
-                break;
+                    break;
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             document.body.style.cursor = 'default';
@@ -119,70 +120,84 @@ $(document).ready(function () {
     });
 });
 
+function verificarContraseñas() {
+    if ($("#txtClave").val() != $("#txtClave2").val()) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Las contraseñas no coinciden'
+        });
+        return false
+    }
+    return true
+}
+
 // sobrescritura del submit del formulario modificar datos de usuario
 $(document).ready(function () {
     $("#formModificaroUsuario").submit(function (e) {
         e.preventDefault();
         var parametros = new FormData(this);
-        // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
-        document.querySelector("#btnModificarCuenta").setAttribute("disabled", false);
-        document.body.style.cursor = 'wait';
-        // petición ajax
-        $.ajax({
-            type: 'POST',
-            url: '/modificar-usuario/',
-            data: parametros,
-            dataType: 'json',
-            cache: false,
-            contentType: false,
-            processData: false
-        }).done(function (data) {
-            document.body.style.cursor = 'default';
-            document.querySelector("#btnModificarCuenta").removeAttribute("disabled")
-            switch (data.result) {
-                case '1':
+        if (verificarContraseñas()) {
+            // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
+            document.querySelector("#btnModificarCuenta").setAttribute("disabled", false);
+            document.body.style.cursor = 'wait';
+            // petición ajax
+            $.ajax({
+                type: 'POST',
+                url: '/modificar-usuario/',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#btnModificarCuenta").removeAttribute("disabled")
+                switch (data.result) {
+                    case '1':
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Excelente!',
+                            text: 'Datos de perfil modificados exitosamente.',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            location.reload()
+                        });
+                        break;
+                    case '3':
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'La cédula ya se encuentra registra por otro usuario'
+                        });
+                        break;
+                    case '4':
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'El nombre de usuario ya se encuentra registro por otra persona'
+                        });
+                        break;
+                    case '0':
+                    case '2':
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Sucedió un error en registrar tus datos, intentalo de nuevo'
+                        });
+                        break;
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#btnModificarCuenta").removeAttribute("disabled")
                 Swal.fire({
-                    icon: 'success',
-                    title: '¡Excelente!',
-                    text: 'Datos de perfil modificados exitosamente.',
-                    confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        location.reload()
-                    });
-                break;
-                case '3':
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'La cédula ya se encuentra registra por otro usuario'
-                    });
-                break;
-                case '4':
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'El nombre de usuario ya se encuentra registro por otra persona'
-                    });
-                break;
-                case '0':
-                case '2':
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Sucedió un error en registrar tus datos, intentalo de nuevo'
-                    });
-                break;
-            }
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            document.body.style.cursor = 'default';
-            document.querySelector("#btnModificarCuenta").removeAttribute("disabled")
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Sucedió un error en modificar tus datos, intentalo de nuevo'
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Sucedió un error en modificar tus datos, intentalo de nuevo'
+                });
+            }).always(function (data) {
             });
-        }).always(function (data) {
-        });
+        }
     });
 });
 
@@ -216,15 +231,15 @@ $(document).on('submit', '#formGuardarFoto', function (e) {
         document.querySelector("#btnGuardarFoto").removeAttribute("disabled")
         switch (data.result) {
             case '1':
-            Swal.fire({
-                icon: 'success',
-                title: '¡Excelente!',
-                text: 'Foto de perfil modificada exitosamente.',
-                confirmButtonText: 'Ok'
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Excelente!',
+                    text: 'Foto de perfil modificada exitosamente.',
+                    confirmButtonText: 'Ok'
                 }).then((result) => {
                     location.reload();
                 });
-            break;
+                break;
             case '0':
             case '2':
                 Swal.fire({
@@ -232,7 +247,7 @@ $(document).on('submit', '#formGuardarFoto', function (e) {
                     title: 'Oops...',
                     text: 'Sucedió un error en modificar la foto, intentalo de nuevo'
                 });
-            break;
+                break;
         }
     }).fail(function (jqXHR, textStatus, errorThrown) {
         document.body.style.cursor = 'default';

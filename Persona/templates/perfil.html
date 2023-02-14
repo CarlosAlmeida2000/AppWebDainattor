@@ -10,7 +10,7 @@
 {% block content %}
 <div class="titulo">Perfil</div>
 <div class="row">
-    <div class="col-md-5 card border-sombra p-4 left-6">
+    <div class="col-md-5 card border-sombra p-4 left-2 mt-2 mx-4">
         <form method="POST" id="formModificaroUsuario" name="formModificaroUsuario">
             {% csrf_token %}
             <div class="mb-3">
@@ -21,7 +21,7 @@
             </div>
             <div class="mb-3">
                 <label for="dtmFechaNaci" class="form-label">Fecha de nacimiento</label>
-                <input type="date" min="1960-01-01" max="2023-12-31" value="{{ unUsuario.persona.fecha_nacimiento }}"
+                <input type="date" min="1960-01-01" max="2018-12-31" value="{{ unUsuario.persona.fecha_nacimiento }}"
                     form="formModificaroUsuario" class="form-control" id="dtmFechaNaci" name="dtmFechaNaci" required />
             </div>
             <div class="mb-3">
@@ -31,25 +31,38 @@
             </div>
             <div class="mb-3">
                 <label for="txtClave" class="form-label">Contraseña</label>
-                <div class="row">
-                    <input type="password" form="formModificaroUsuario" class="form-control col mx-3" id="txtClave" name="txtClave"
-                    placeholder="***********" />
-                    <button id="verClave" name="verClave" class="btn btn-primary col-sm-1 mx-3 verClave" onclick="javascript:mostrarValor(txtClave);" type="button"><i class="fas fa-eye"></i></button>
+                <div class="input-group ">
+                    <input type="password" form="formModificaroUsuario" class="form-control col" id="txtClave"
+                        name="txtClave" placeholder="***********" />
+
+                    <button type="button" id="verClave" name="verClave" class="btn btn-icon btn-primary mx-2"
+                        data-bs-toggle="modal" data-bs-target="#modal-select-provider"
+                        onclick="javascript:mostrarValor(txtClave);">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="txtClave2" class="form-label">Repita la contraseña</label>
-                <div class="row">
-                    <input type="password" form="formModificaroUsuario" class="form-control col mx-3" id="txtClave2" name="txtClave2"
-                    placeholder="***********" />
-                <button id="verClave" name="verClave" class="btn btn-primary col-sm-1 mx-3 verClave" onclick="javascript:mostrarValor(txtClave2);" type="button"><i class="fas fa-eye"></i></button>
+                <div class="input-group ">
+                    <input type="password" form="formModificaroUsuario" class="form-control col" id="txtClave2"
+                        name="txtClave2" placeholder="***********" />
+
+                    <button type="button" id="verClave" name="verClave" class="btn btn-icon btn-primary mx-2"
+                        data-bs-toggle="modal" data-bs-target="#modal-select-provider"
+                        onclick="javascript:mostrarValor(txtClave2);">
+                        <i class="fas fa-eye"></i>
+                    </button>
                 </div>
             </div>
-            <button id="btnModificarCuenta" class="btn btn-success" type="submit" form="formModificaroUsuario"><i
-                    class="fas fa-save"></i> Guardar cambios</button>
+
+            <div class="text-center">
+                <button id="btnModificarCuenta" class="btn btn-success btn-sm" type="submit" form="formModificaroUsuario"
+                title="Guardar cambios"><i class="fas fa-save"></i> Guardar cambios</button>
+            </div>
         </form>
     </div>
-    <div class="col-md-5 card border-sombra left-6 mx-5">
+    <div class="col-md-5 card border-sombra left-2 mt-2 mx-4">
         <form method="POST" class="text-center mt-5" id="formGuardarFoto" enctype="multipart/form-data">
             {% csrf_token %}
             {% if request.session.fotoPerfil %}
@@ -60,12 +73,14 @@
                 style="max-height: 400px;">
             {% endif %}
             <div>
-                <label for="nuestroinput" class="btn btn-primary btn-sm mt-2"><i class="fas fa-upload"></i>
+                <label for="nuestroinput" class="btn btn-primary btn-sm mt-2" title="Subir"><i
+                        class="fas fa-upload"></i>
                     Subir</label>
                 <input class="btn btn-success btn-sm subirfoto"
                     style="overflow: hidden; opacity: 0;width: 0.1px; height: 0.1px;" type="file" name="imgFoto"
                     id="nuestroinput" accept="image/*" onchange="previewimagen(this);">
-                <button type="submit" class="btn btn-success btn-sm" id="btnGuardarFoto"><i class="fas fa-save"></i>
+                <button type="submit" class="btn btn-success btn-sm" id="btnGuardarFoto" title="Guardar foto"><i
+                        class="fas fa-save"></i>
                     Guardar foto</button>
             </div>
         </form>

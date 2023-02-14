@@ -4,7 +4,7 @@ const video = document.getElementById('video')
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext('2d')
 var cont_imagenes = 0
-var caputarar_imagenes = 100
+var caputarar_imagenes = 70
 var entrenando = false
 var monitoreando = false
 
@@ -28,7 +28,7 @@ function iniciarVideo(accion) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Sucedió un error en obtener iniciar el video, intentalo de nuevo'
+                text: 'Sucedió un error en iniciar el video, intentalo de nuevo'
             });
         });
 }
@@ -42,26 +42,52 @@ function detenerVideo() {
 switchEntrenamiento.addEventListener('click', function () {
     if (!entrenando) {
         entrenando = true
+        document.querySelector("#switchMonitoreo").setAttribute("disabled", false);
         iniciarVideo('entrenamiento')
     } else {
         entrenando = false
         cont_imagenes = 0
         detenerVideo()
+        document.querySelector("#switchMonitoreo").removeAttribute("disabled")
         $("#seccion-entrenamiento").addClass("d-none");
-        detenerVideo()
     }
 });
 
 switchMonitoreo.addEventListener('click', function () {
     if (!monitoreando) {
-        monitoreando = true
-        $("#reloj-monitoreo").css("color", "#0e0c66")
-        $("#tiempo").css("color", "#0e0c66")
-        iniciarVideo('monitoreo')
+        var csrftoken = getCookie('csrftoken')
+        $.ajax({
+            url: '/tiene-entrenamiento/',
+            type: 'POST',
+            data: { csrfmiddlewaretoken: csrftoken },
+            dataType: "json"
+        }).done(function (data) {
+            if (data.result) {
+                monitoreando = true
+                document.querySelector("#switchEntrenamiento").setAttribute("disabled", false);
+                $("#reloj-monitoreo").css("color", "#0e0c66")
+                $("#tiempo").css("color", "#0e0c66")
+                iniciarVideo('monitoreo')
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Debe de realizar el entrenamiento facial para poder monitorear las expresiones faciales'
+                });
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Sucedió un error al cargar los datos, intentalo de nuevo'
+            });
+        }).always(function (data) {
+        });
     } else {
         monitoreando = false
         detenerVideo()
         reiniciarCronometro()
+        document.querySelector("#switchEntrenamiento").removeAttribute("disabled")
         $("#seccion-monitoreo").addClass("d-none");
     }
 });
@@ -92,6 +118,7 @@ function iniciarEntrenamiento() {
             case '0':
                 cont_imagenes = 0
                 detenerVideo()
+                document.querySelector("#switchMonitoreo").removeAttribute("disabled")
                 $("#seccion-entrenamiento").addClass("d-none");
                 Swal.fire({
                     icon: 'error',
@@ -100,11 +127,17 @@ function iniciarEntrenamiento() {
                 });
                 break;
         }
-        if (cont_imagenes < caputarar_imagenes) {
+        if (cont_imagenes < caputarar_imagenes & entrenando == true) {
             iniciarEntrenamiento()
+        } else if (entrenando == false) {
+            cont_imagenes = 0
+            detenerVideo()
+            $("#seccion-entrenamiento").addClass("d-none");
+            return 0
         } else {
             cont_imagenes = 0
             detenerVideo()
+            document.querySelector("#switchMonitoreo").removeAttribute("disabled")
             $("#seccion-entrenamiento").addClass("d-none");
             Swal.fire({
                 icon: 'success',
@@ -116,6 +149,7 @@ function iniciarEntrenamiento() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         cont_imagenes = 0
         detenerVideo()
+        document.querySelector("#switchMonitoreo").removeAttribute("disabled")
         $("#seccion-entrenamiento").addClass("d-none");
         Swal.fire({
             icon: 'error',
@@ -159,8 +193,8 @@ function cronometro() {
         tiempo.innerHTML = minutos + ":" + segundos + ":" + centesimas + ""
     }
     if (segundos == $("#tiempo-monitoreo option:selected").val()) {
-        reiniciarCronometro()
         monitorearExpre()
+        reiniciarCronometro()
     }
     if (segundos == 59) {
         segundos = -1
@@ -239,10 +273,5 @@ function monitorearExpre() {
         });
     }).always(function (data) {
     });
+
 }
-/*
-Swal.fire({
-    icon: 'warning',
-    title: 'Oops...',
-    text: 'Debe realizar el entrenamiento facial para ponder activar el monitoreo'
-});*/

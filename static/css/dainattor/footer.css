@@ -13,17 +13,14 @@
 }
 
 .footer-grid {
-    display: grid;
-    gap: 2em;
-    grid-template-columns: repeat(3, 1fr);
+    display:flex;
     width: 100%;
     margin-top: 25px;
-    margin-left: 190px;
 }
 
 .mail {
     padding-right: 0.5rem;
-    color: white;
+    color: black;
 }
 
 .item-conteiner {
@@ -42,11 +39,4 @@
 .item > a:hover {
     color: #2a6275;
     text-decoration: #2a6275;
-}
-
-@media (max-width: 700px) {
-    .footer-grid {
-        text-align: center;
-        display: block;
-    }
 }

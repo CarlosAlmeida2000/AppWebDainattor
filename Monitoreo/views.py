@@ -18,7 +18,20 @@ def vwConfiguracion(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
+    usuario = Usuarios.objects.get(pk = request.session.get('usuarioId'))
     return render(request, 'configuracion.html', {'configuracion': 'activado'})
+
+# Vista para consultar si existe un entrenamiento facial
+def vwTieneEntrenamiento(request):
+    try:
+        if request.method == 'POST':
+            # Si no existe usuario autenticado, se lo redirecciona al login
+            if not request.session.get('usuarioId'):
+                return redirect('/')
+            usuario = Usuarios.objects.get(pk = request.session.get('usuarioId'))
+            return JsonResponse({'result': usuario.entrenamiento_facial})
+    except Exception as e:
+        return JsonResponse({'result': 'false'})
 
 # Vista que guardar una foto para el entrenamiento facial
 def vwCaptRostroEntrena(request):

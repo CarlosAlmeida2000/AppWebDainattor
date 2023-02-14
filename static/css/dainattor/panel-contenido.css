@@ -17,6 +17,26 @@ body {
     border-radius: 5px;
 }
 
+.btn-entrenamiento{
+    background-color: rgb(55, 123, 125);
+    color: white;
+}
+
+.btn-entrenamiento:hover{
+    background-color: rgb(101, 162, 164);
+    color: white;
+}
+
+.btn-monitoreo{
+    background-color: rgb(32, 132, 92);
+    color: white;
+}
+
+.btn-monitoreo:hover{
+    background-color: rgb(92, 186, 149);
+    color: white;
+}
+
 .contenido-num {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

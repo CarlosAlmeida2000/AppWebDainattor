@@ -108,7 +108,6 @@ def vwModificarUsuario(request):
                     unUsuario.clave = cifrar(request.POST['txtClave'])
                 unaPersona = Personas.objects.get(pk = unUsuario.persona.id)
                 unaPersona.nombres_apellidos = request.POST['txtNombres']
-                unaPersona.cedula = request.POST['txtCedula']
                 unaPersona.fecha_nacimiento = request.POST['dtmFechaNaci']
                 unaPersona.save()
                 unUsuario.save()
@@ -121,24 +120,25 @@ def vwModificarUsuario(request):
     except Personas.DoesNotExist or Usuarios.DoesNotExist:
         return JsonResponse({'result': '2'})
     except Exception as e:
+        print(str(e))
         return JsonResponse({'result': '0'})
 
 # Vista para realizar cambio de foto de usuario
 def vwModificarFotoUsuario(request):
     try:
-        if request.method == 'POST':
+        if request.method == 'POST' and 'imgFoto' in request.FILES:
             unaPersona = Personas.objects.get(pk = request.session['personaId'])
             imgborrar = unaPersona.foto_perfil.name
             try:
                 unaPersona.foto_perfil = request.FILES['imgFoto']
                 a, b = os.path.splitext(unaPersona.foto_perfil.name)
-                unaPersona.foto_perfil.name = "img_persona_" + str(unaPersona.id) + b
+                unaPersona.foto_perfil.name = "img_persona_" + str(unaPersona.pk) + str(b)
                 unaPersona.save()
-                os.remove('media\\' + imgborrar)
+                # Actualizar la variable sesion de foto de usuario.
+                request.session['fotoPerfil'] = '\\media\\' + str(unaPersona.foto_perfil.name)
+                os.remove('media\\' + str(imgborrar))
             except Exception as e:
                 pass
-        # Actualizar la variable sesion de foto de usuario.
-        request.session['fotoPerfil'] = '\\media\\' + unaPersona.foto_perfil.name
         return JsonResponse({'result': '1'})
     except Personas.DoesNotExist:
         return JsonResponse({'result': '2'})

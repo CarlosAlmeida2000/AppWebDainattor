@@ -88,6 +88,8 @@ switchMonitoreo.addEventListener('click', function () {
         detenerVideo()
         reiniciarCronometro()
         document.querySelector("#switchEntrenamiento").removeAttribute("disabled")
+        $("#icono-exprexion").html('<i class="fas fa-smile-beam"></i> <i class="fas fa-search"></i>');
+        $("#estado-monitoreo").text('')
         $("#seccion-monitoreo").addClass("d-none");
     }
 });

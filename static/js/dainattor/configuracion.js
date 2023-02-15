@@ -18,7 +18,6 @@ function iniciarVideo(accion) {
             video.srcObject = stream;
             if (accion == 'entrenamiento') {
                 $("#seccion-entrenamiento").removeClass("d-none");
-                show_spinner()
                 iniciarEntrenamiento()
             } else {
                 $("#seccion-monitoreo").removeClass("d-none");
@@ -136,14 +135,12 @@ function iniciarEntrenamiento() {
             cont_imagenes = 0
             detenerVideo()
             $("#seccion-entrenamiento").addClass("d-none");
-            hide_spinner()
             return 0
         } else {
             cont_imagenes = 0
             detenerVideo()
             document.querySelector("#switchMonitoreo").removeAttribute("disabled")
             $("#seccion-entrenamiento").addClass("d-none");
-            hide_spinner()
             Swal.fire({
                 icon: 'success',
                 title: '¡Excelente!',
@@ -156,7 +153,6 @@ function iniciarEntrenamiento() {
         detenerVideo()
         document.querySelector("#switchMonitoreo").removeAttribute("disabled")
         $("#seccion-entrenamiento").addClass("d-none");
-        hide_spinner()
         Swal.fire({
             icon: 'error',
             title: 'Oops...',

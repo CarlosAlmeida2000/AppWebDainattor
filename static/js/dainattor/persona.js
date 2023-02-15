@@ -10,6 +10,7 @@ function mostrarValor(tipo) {
 $(document).ready(function () {
     $("#formRegistroUsuario").submit(function (e) {
         e.preventDefault();
+        show_spinner()
         var parametros = new FormData(this);
         if (verificarContraseñas()) {
             // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
@@ -27,6 +28,7 @@ $(document).ready(function () {
             }).done(function (data) {
                 document.body.style.cursor = 'default';
                 document.querySelector("#btnCrearCuenta").removeAttribute("disabled")
+                hide_spinner()
                 switch (data.result) {
                     case '1':
                         Swal.fire({
@@ -56,6 +58,7 @@ $(document).ready(function () {
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 document.body.style.cursor = 'default';
                 document.querySelector("#btnCrearCuenta").removeAttribute("disabled")
+                hide_spinner()
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -71,6 +74,7 @@ $(document).ready(function () {
 // sobrescritura del submit del formulario de inicio de sesión
 $(document).ready(function () {
     $("#formLogin").submit(function (e) {
+        show_spinner()
         e.preventDefault();
         var parametros = new FormData(this);
         // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
@@ -88,6 +92,7 @@ $(document).ready(function () {
         }).done(function (data) {
             document.body.style.cursor = 'default';
             document.querySelector("#iniciarSesion").removeAttribute("disabled")
+            hide_spinner()
             switch (data.result) {
                 case '1':
                     window.location.href = '/home';
@@ -110,6 +115,7 @@ $(document).ready(function () {
         }).fail(function (jqXHR, textStatus, errorThrown) {
             document.body.style.cursor = 'default';
             document.querySelector("#iniciarSesion").removeAttribute("disabled")
+            hide_spinner()
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -136,6 +142,7 @@ function verificarContraseñas() {
 $(document).ready(function () {
     $("#formModificaroUsuario").submit(function (e) {
         e.preventDefault();
+        show_spinner()
         var parametros = new FormData(this);
         if (verificarContraseñas()) {
             // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
@@ -153,6 +160,7 @@ $(document).ready(function () {
             }).done(function (data) {
                 document.body.style.cursor = 'default';
                 document.querySelector("#btnModificarCuenta").removeAttribute("disabled")
+                hide_spinner()
                 switch (data.result) {
                     case '1':
                         Swal.fire({
@@ -190,6 +198,7 @@ $(document).ready(function () {
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 document.body.style.cursor = 'default';
                 document.querySelector("#btnModificarCuenta").removeAttribute("disabled")
+                hide_spinner()
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -216,6 +225,7 @@ function previewimagen(input) {
 // sobrescritura del submit del formulario modificar foto de usuario
 $(document).on('submit', '#formGuardarFoto', function (e) {
     e.preventDefault();
+    show_spinner()
     var data = new FormData(this);
     // se bloquea el botón guardar para que el usuario no envíe múltiples peticiones
     document.querySelector("#btnGuardarFoto").setAttribute("disabled", false);
@@ -229,6 +239,7 @@ $(document).on('submit', '#formGuardarFoto', function (e) {
     }).done(function (data) {
         document.body.style.cursor = 'default';
         document.querySelector("#btnGuardarFoto").removeAttribute("disabled")
+        hide_spinner()
         switch (data.result) {
             case '1':
                 Swal.fire({
@@ -252,6 +263,7 @@ $(document).on('submit', '#formGuardarFoto', function (e) {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         document.body.style.cursor = 'default';
         document.querySelector("#btnGuardarFoto").removeAttribute("disabled")
+        hide_spinner()
         Swal.fire({
             icon: 'error',
             title: 'Oops...',

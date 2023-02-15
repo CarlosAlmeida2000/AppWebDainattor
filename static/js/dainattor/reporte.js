@@ -1,8 +1,11 @@
+show_spinner()
+
 const labels = ['Enfadado', 'Disgustado', 'Temeroso', 'Feliz', 'Neutral', 'Triste', 'Sorprendido']
  
 const graph = document.querySelector("#grafica-expresiones")
 
 var csrftoken = getCookie('csrftoken')
+
 $.ajax({
     url: '/grafico/',
     type: 'POST',
@@ -12,17 +15,20 @@ $.ajax({
     if(data.result == '1'){
         if(data.grafico.length > 0){
             graficar([data.grafico[0].enfadado, data.grafico[0].disgustado, data.grafico[0].temeroso, data.grafico[0].feliz, data.grafico[0].neutral, data.grafico[0].triste, data.grafico[0].sorprendido])
+            hide_spinner()
             $("#prediccion").text(data.grafico[0].prediccion_trastorno)
             for(let i = 0; i < data.grafico[0].actividades.length; i++){
                 $("#lista_actividades").prepend("<li> "+ data.grafico[0].actividades[i] +" </li>")
             }
         }else{
             graficar([0, 0, 0, 0, 0, 0, 0])
+            hide_spinner()
             $("#prediccion").text("Sin predicción, porque no existe un historial")
             $("#lista_actividades").prepend("<li> Sin actividades, porque no existe un historial </li>")
         }
     }else{
         graficar([0, 0, 0, 0, 0, 0, 0])
+        hide_spinner()
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -31,6 +37,7 @@ $.ajax({
     }
 }).fail(function (jqXHR, textStatus, errorThrown) {
     graficar([0, 0, 0, 0, 0, 0, 0])
+    hide_spinner()
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -62,4 +69,4 @@ function graficar(data){
         data: data_grafico,
     };
     new Chart(graph, config);
-}
+} 

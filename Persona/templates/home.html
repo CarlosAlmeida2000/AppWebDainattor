@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap_4.6.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/base/spinner.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/dainattor/perfil-box.css' %}">
     <link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido.css' %}" />
     <link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido-responsive.css' %}" />
@@ -82,6 +83,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="panel-contenido">
             {% block content %} {% endblock content %}
         </div>
@@ -91,7 +93,6 @@
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/sweetalert/sweetalert_2_v10.js'%}"></script>
     <script src="{% static 'js/sweetalert/sweetalert.min.js'%}"></script>
-
     <script src="{% static '/js/dainattor/global.js'%}"></script>
 
     <script>

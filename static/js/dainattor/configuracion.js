@@ -18,6 +18,7 @@ function iniciarVideo(accion) {
             video.srcObject = stream;
             if (accion == 'entrenamiento') {
                 $("#seccion-entrenamiento").removeClass("d-none");
+                show_spinner()
                 iniciarEntrenamiento()
             } else {
                 $("#seccion-monitoreo").removeClass("d-none");
@@ -135,12 +136,14 @@ function iniciarEntrenamiento() {
             cont_imagenes = 0
             detenerVideo()
             $("#seccion-entrenamiento").addClass("d-none");
+            hide_spinner()
             return 0
         } else {
             cont_imagenes = 0
             detenerVideo()
             document.querySelector("#switchMonitoreo").removeAttribute("disabled")
             $("#seccion-entrenamiento").addClass("d-none");
+            hide_spinner()
             Swal.fire({
                 icon: 'success',
                 title: '¡Excelente!',
@@ -153,6 +156,7 @@ function iniciarEntrenamiento() {
         detenerVideo()
         document.querySelector("#switchMonitoreo").removeAttribute("disabled")
         $("#seccion-entrenamiento").addClass("d-none");
+        hide_spinner()
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -213,6 +217,7 @@ function cronometro() {
 }
 
 function monitorearExpre() {
+    show_spinner()
     var csrftoken = getCookie('csrftoken')
     context.drawImage(video, 0, 0, 640, 480)
     const data = canvas.toDataURL()
@@ -224,6 +229,7 @@ function monitorearExpre() {
     }).done(function (data) {
         reiniciarCronometro()
         inicioCronometro()
+        hide_spinner()
         switch (data.result) {
             case '1':
                 if (data.tiene_rostro == '1') {
@@ -268,6 +274,7 @@ function monitorearExpre() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         reiniciarCronometro()
         inicioCronometro()
+        hide_spinner()
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
@@ -275,5 +282,4 @@ function monitorearExpre() {
         });
     }).always(function (data) {
     });
-
 }

@@ -33,3 +33,17 @@ function soloCedula(event) {
         return false;
     }
 }
+
+// mostrar spinner
+function show_spinner() {
+    $("#spinner").show();
+    $("#spinner").addClass("mostrar-spinner");
+    $("body").css("overflow", "hidden");
+}
+
+// eliminar spinner
+function hide_spinner() {
+    $("#spinner").hide();
+    $("#spinner").removeAttr("class");
+    $("body").css("overflow", "auto");
+}

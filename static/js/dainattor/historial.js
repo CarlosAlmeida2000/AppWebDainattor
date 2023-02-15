@@ -1,3 +1,5 @@
+show_spinner()
+
 var f = new Date();
 añoActual = f.getFullYear()
 mesActual = (f.getMonth() + 1)
@@ -21,3 +23,5 @@ function verFotoHistorial(rutaFoto, expresionFacial){
       })
       myModal.toggle()
 }
+
+hide_spinner()

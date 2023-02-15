@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap_4.6.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/base/header.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/base/spinner.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/dainattor/footer.css' %}">
     <link rel="icon" href="{% static 'img/doctorIcono.jpg' %}" type="image/png" />
 
@@ -32,13 +33,18 @@
         </nav>
     </header>
     <main class="container-hu">
-        {% block content %} {% endblock content %}
+        <div id="spinner">
+            {% include 'components/spinner.html' %}
+        </div>
+        {% block content %} 
+        {% endblock content %}
     </main>
 
     {% block content2 %} {% endblock content2 %}
     <script src="{% static 'js/jquery/jquery-3.4.1.min.js'%}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/sweetalert/sweetalert_2_v10.js' %}"></script>
+    <script src="{% static 'js/dainattor/global.js'%}"></script>
 
     {% block js %} {% endblock js %}
 </body>

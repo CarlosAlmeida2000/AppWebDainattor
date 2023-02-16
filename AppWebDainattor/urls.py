@@ -34,7 +34,7 @@ urlpatterns = [
     path('modificar-foto-usuario/', vwPersona.vwModificarFotoUsuario, name='modificar-foto-usuario'),
     path('logout/', vwPersona.CerrarSesion, name='logout'),
     # Sección de Monitoreo
-    path('configuracion/', vwMonitoreo.vwConfiguracion, name='configuracion'),
+    path('monitoreo/', vwMonitoreo.vwMonitoreo, name='monitoreo'),
     path('capturar-rostro-entrenamiento/', vwMonitoreo.vwCaptRostroEntrena, name='capturar-rostro-entrenamiento'),
     path('tiene-entrenamiento/', vwMonitoreo.vwTieneEntrenamiento, name='tiene-entrenamiento'),
     path('monitorear-expesiones/', vwMonitoreo.vwMonitorearExpre, name='monitorear-expesiones'),

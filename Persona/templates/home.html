@@ -32,9 +32,9 @@
                 <p class="nombre-empresa">{{ request.session.nombres }}</p>
             </div>
             <div class="opciones">
-                <a class="btn-opcion {{ configuracion }}" href="{% url 'configuracion' %}">
+                <a class="btn-opcion {{ monitoreo }}" href="{% url 'monitoreo' %}">
                     <i class="fa fa-cog"></i>
-                    <span>Configuración<span>
+                    <span>Monitoreo<span>
                 </a>
                 <a class="btn-opcion {{ opc_historial  }}" href="{% url 'historial' %}">
                     <i class="fas fa-book-open"></i>
@@ -60,9 +60,9 @@
                     <i class="fas fa-bars"></i>
                 </a>
                 <div class="dropdown-menu" id="btn-opciones" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item btn-opcion" href="{% url 'configuracion' %}">
+                    <a class="dropdown-item btn-opcion" href="{% url 'monitoreo' %}">
                         <i class="fa fa-cog"></i>
-                        <span>Configuración<span>
+                        <span>Monitoreo<span>
                     </a>
                     <a class="dropdown-item btn-opcion" href="{% url 'historial' %}">
                         <i class="fas fa-book-open"></i>
@@ -98,7 +98,7 @@
     <script>
         // Cargar el sumario luego de pasar por el login y así no se muestre vacío el panel, hasta que seleccione una opción del menú
         if ($('.panel-contenido').find("div").val() == undefined) {
-            location.href = '/configuracion/'
+            location.href = '/monitoreo/'
         }
     </script>
 

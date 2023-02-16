@@ -1,16 +1,16 @@
 {% extends 'home.html' %}
 {% load static %}
 
-{% block title %}Configuración - {% endblock title %}
+{% block title %}Monitoreo - {% endblock title %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/dainattor/panel-contenido.css' %}" />
 {% endblock css %}
 
 {% block content %}
-<div class="titulo">Configuraciones</div>
+<div class="titulo">Monitoreo</div>
 <div class="row">
-    <div class="card col-sm-5 border-sombra left-2 pt-1"> 
+    <div class="card col-sm-5 border-sombra left-2 mx-2 mr-3"> 
         <div>
             <div class="border-bottom mt-3">
                 <h6><i class="fas fa-smile"></i> Entrenamiento facial</h6>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-    <div class="card col-sm-6 border-sombra left-2 mx-4 p-4">
+    <div class="card col-sm-6 border-sombra left-2 mx-2 mr-3 p-3">
         <h6><i class="fas fa-camera"></i> Video de la cámara web</h6>
         <div style="white-space: nowrap; overflow-x: auto;" class="video-wrap border border-dark">
             <video id="video" width="640" height="480" playsinline autoplay></video>
@@ -76,5 +76,5 @@
 </div>
 {% endblock content %}
 {% block js %}
-<script src="{% static '/js/dainattor/configuracion.js'%}"></script>
+<script src="{% static '/js/dainattor/monitoreo.js'%}"></script>
 {% endblock %}

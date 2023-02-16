@@ -10,8 +10,8 @@
 {% block content %}
 <div class="titulo">Perfil</div>
 <div class="row">
-    <div class="col-md-5 card border-sombra p-4 left-2 mt-2 mx-4">
-        <form method="POST" id="formModificaroUsuario" name="formModificaroUsuario">
+    <div class="col-md-5 card border-sombra left-2 mx-2 mr-3">
+        <form method="POST" id="formModificaroUsuario" name="formModificaroUsuario" class="p-3">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="txtNombres" class="form-label">Nombres y apellidos</label>
@@ -62,10 +62,9 @@
             </div>
         </form>
     </div>
-    <div class="col-md-5 card border-sombra left-2 mx-4">
-        <label for="foto-usuario" class="form-label mt-4 text-center">Foto de perfil</label>
-
-        <form method="POST" class="text-center mt-2" id="formGuardarFoto" enctype="multipart/form-data">
+    <div class="col-md-5 card border-sombra left-2 mx-2 mr-3">
+        <form method="POST" class="text-center p-3" id="formGuardarFoto" enctype="multipart/form-data">
+            <label for="foto-usuario" class="form-label mt-2 text-center">Foto de perfil</label>
             {% csrf_token %}
             {% if request.session.fotoPerfil %}
             <img id="foto-usuario" src="{{ request.session.fotoPerfil }}" class="img-thumbnail img-fluid"

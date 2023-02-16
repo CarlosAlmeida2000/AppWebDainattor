@@ -14,12 +14,12 @@ expresion = ExpresionFacial()
 
 # Create your views here.
 # Vista para renderizar la plantilla de index
-def vwConfiguracion(request):
+def vwMonitoreo(request):
     # Si no existe usuario autenticado, se lo redirecciona al login
     if not request.session.get('usuarioId'):
         return redirect('/')
     usuario = Usuarios.objects.get(pk = request.session.get('usuarioId'))
-    return render(request, 'configuracion.html', {'configuracion': 'activado'})
+    return render(request, 'monitoreo.html', {'monitoreo': 'activado'})
 
 # Vista para consultar si existe un entrenamiento facial
 def vwTieneEntrenamiento(request):

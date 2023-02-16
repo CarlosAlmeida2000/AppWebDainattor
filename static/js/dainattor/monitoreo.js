@@ -65,7 +65,7 @@ switchMonitoreo.addEventListener('click', function () {
             if (data.result) {
                 monitoreando = true
                 document.querySelector("#switchEntrenamiento").setAttribute("disabled", false);
-                $("#reloj-monitoreo").css("color", "#0e0c66")
+                $("#reloj-monitoreo").css("color", "#0e0c66")                
                 $("#tiempo").css("color", "#0e0c66")
                 iniciarVideo('monitoreo')
             } else {

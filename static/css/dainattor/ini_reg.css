@@ -8,6 +8,11 @@
   color: var(--color_azul);
 }
 
+.descripcion-software{
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
 .container-hu {
   display: grid;
   align-items: center;

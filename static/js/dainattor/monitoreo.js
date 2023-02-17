@@ -43,11 +43,15 @@ switchEntrenamiento.addEventListener('click', function () {
     if (!entrenando) {
         entrenando = true
         document.querySelector("#switchMonitoreo").setAttribute("disabled", false);
+        $("#switchEntrenamiento").html('<i class="fas fa-video"></i> Detener')
+        $("#switchEntrenamiento").css("background", "#ff0000")
         iniciarVideo('entrenamiento')
     } else {
         entrenando = false
         cont_imagenes = 0
         detenerVideo()
+        $("#switchEntrenamiento").html('<i class="fas fa-video"></i> Entrenar rostro')
+        $("#switchEntrenamiento").css("background", "rgb(55, 123, 125)")
         document.querySelector("#switchMonitoreo").removeAttribute("disabled")
         $("#seccion-entrenamiento").addClass("d-none");
     }
@@ -65,6 +69,8 @@ switchMonitoreo.addEventListener('click', function () {
             if (data.result) {
                 monitoreando = true
                 document.querySelector("#switchEntrenamiento").setAttribute("disabled", false);
+                $("#switchMonitoreo").html('<i class="fas fa-video"></i> Detener monitoreo')
+                $("#switchMonitoreo").css("background", "#ff0000")
                 $("#reloj-monitoreo").css("color", "#0e0c66")                
                 $("#tiempo").css("color", "#0e0c66")
                 iniciarVideo('monitoreo')
@@ -76,6 +82,8 @@ switchMonitoreo.addEventListener('click', function () {
                 });
             }
         }).fail(function (jqXHR, textStatus, errorThrown) {
+            $("#switchMonitoreo").html('<i class="fas fa-video"></i> Iniciar monitoreo')
+            $("#switchMonitoreo").css("background", "rgb(32, 132, 92)")
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -88,6 +96,8 @@ switchMonitoreo.addEventListener('click', function () {
         detenerVideo()
         reiniciarCronometro()
         document.querySelector("#switchEntrenamiento").removeAttribute("disabled")
+        $("#switchMonitoreo").html('<i class="fas fa-video"></i> Iniciar monitoreo')
+        $("#switchMonitoreo").css("background", "rgb(32, 132, 92)")
         $("#icono-exprexion").html('<i class="fas fa-smile-beam"></i> <i class="fas fa-search"></i>');
         $("#estado-monitoreo").text('')
         $("#seccion-monitoreo").addClass("d-none");
@@ -121,6 +131,8 @@ function iniciarEntrenamiento() {
                 cont_imagenes = 0
                 detenerVideo()
                 document.querySelector("#switchMonitoreo").removeAttribute("disabled")
+                $("#switchEntrenamiento").html('<i class="fas fa-video"></i> Entrenar rostro')
+                $("#switchEntrenamiento").css("background", "rgb(55, 123, 125)")
                 $("#seccion-entrenamiento").addClass("d-none");
                 Swal.fire({
                     icon: 'error',
@@ -140,6 +152,8 @@ function iniciarEntrenamiento() {
             cont_imagenes = 0
             detenerVideo()
             document.querySelector("#switchMonitoreo").removeAttribute("disabled")
+            $("#switchEntrenamiento").html('<i class="fas fa-video"></i> Entrenar rostro')
+            $("#switchEntrenamiento").css("background", "rgb(55, 123, 125)")
             $("#seccion-entrenamiento").addClass("d-none");
             Swal.fire({
                 icon: 'success',
@@ -152,6 +166,8 @@ function iniciarEntrenamiento() {
         cont_imagenes = 0
         detenerVideo()
         document.querySelector("#switchMonitoreo").removeAttribute("disabled")
+        $("#switchEntrenamiento").html('<i class="fas fa-video"></i> Entrenar rostro')
+        $("#switchEntrenamiento").css("background", "rgb(55, 123, 125)")
         $("#seccion-entrenamiento").addClass("d-none");
         Swal.fire({
             icon: 'error',
@@ -260,6 +276,8 @@ function monitorearExpre() {
                 }
                 break;
             case '0':
+                $("#switchMonitoreo").html('<i class="fas fa-video"></i> Iniciar monitoreo')
+                $("#switchMonitoreo").css("background", "rgb(32, 132, 92)")
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -271,6 +289,8 @@ function monitorearExpre() {
         reiniciarCronometro()
         inicioCronometro()
         hide_spinner()
+        $("#switchMonitoreo").html('<i class="fas fa-video"></i> Iniciar monitoreo')
+        $("#switchMonitoreo").css("background", "rgb(32, 132, 92)")
         Swal.fire({
             icon: 'error',
             title: 'Oops...',
